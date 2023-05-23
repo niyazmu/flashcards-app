@@ -52,46 +52,55 @@ function Header() {
                 <div className="flex flex-wrap gap-2">
                   <Swatch
                     colour="bg-red-300"
+                    borderColour="border-red-100"
                     checked={deck.colour === "bg-red-300"}
                     handleChange={handleChange}
                   />
                   <Swatch
                     colour="bg-orange-300"
+                    borderColour="border-orange-100"
                     checked={deck.colour === "bg-orange-300"}
                     handleChange={handleChange}
                   />
                   <Swatch
                     colour="bg-yellow-300"
+                    borderColour="border-yellow-100"
                     checked={deck.colour === "bg-yellow-300"}
                     handleChange={handleChange}
                   />
                   <Swatch
                     colour="bg-green-300"
+                    borderColour="border-green-100"
                     checked={deck.colour === "bg-green-300"}
                     handleChange={handleChange}
                   />
                   <Swatch
                     colour="bg-teal-300"
+                    borderColour="border-teal-100"
                     checked={deck.colour === "bg-teal-300"}
                     handleChange={handleChange}
                   />
                   <Swatch
                     colour="bg-blue-300"
+                    borderColour="border-blue-100"
                     checked={deck.colour === "bg-blue-300"}
                     handleChange={handleChange}
                   />
                   <Swatch
                     colour="bg-indigo-300"
+                    borderColour="border-indigo-100"
                     checked={deck.colour === "bg-indigo-300"}
                     handleChange={handleChange}
                   />
                   <Swatch
                     colour="bg-purple-300"
+                    borderColour="border-purple-100"
                     checked={deck.colour === "bg-purple-300"}
                     handleChange={handleChange}
                   />
                   <Swatch
                     colour="bg-pink-300"
+                    borderColour="border-pink-100"
                     checked={deck.colour === "bg-pink-300"}
                     handleChange={handleChange}
                   />

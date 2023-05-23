@@ -1,7 +1,4 @@
-/* You can only pass Tailwind CSS background colours (e.g. 'bg-red-300') to 'colour'. */
-
-function Swatch({ colour, checked, handleChange }) {
-  const borderColour = `border${colour.substring(2).replace("300", "100")}`;
+function Swatch({ colour, borderColour, checked, handleChange }) {
   return (
     <label
       htmlFor={colour}
