@@ -4,7 +4,10 @@ import Modal from "./Modal.jsx";
 
 function Header() {
   const [modal, setModal] = useState(false);
-  const [deck, setDeck] = useState({});
+  const [deck, setDeck] = useState({
+    name: "",
+    colour: "",
+  });
 
   function handleChange(event) {
     const { name, value } = event.target;
