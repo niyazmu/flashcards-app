@@ -7,7 +7,7 @@ function Header() {
   const [modal, setModal] = useState(false);
   const [deck, setDeck] = useState({
     name: "",
-    colour: "",
+    colour: "bg-red-300",
   });
 
   function handleChange(event) {
