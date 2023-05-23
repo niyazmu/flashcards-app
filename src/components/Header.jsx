@@ -45,14 +45,14 @@ function Header() {
             <div className="w-1/2">
               <fieldset>
                 <legend className="mb-2 block font-medium">Colours</legend>
-                <div className="flex items-center space-x-2">
+                <div className="flex flex-wrap gap-2">
                   <label
                     htmlFor="red"
                     className={`${
                       deck.colour === "bg-red-300"
                         ? "border-4 border-red-100"
                         : "border-0"
-                    } flex h-10 w-10 items-center justify-center bg-red-300`}
+                    } flex h-10 w-10 bg-red-300`}
                   >
                     <input
                       className="hidden"
@@ -70,7 +70,7 @@ function Header() {
                       deck.colour === "bg-orange-300"
                         ? "border-4 border-orange-100"
                         : "border-0"
-                    } flex h-10 w-10 items-center justify-center bg-orange-300`}
+                    } flex h-10 w-10 bg-orange-300`}
                   >
                     <input
                       className="hidden"
@@ -88,7 +88,7 @@ function Header() {
                       deck.colour === "bg-yellow-300"
                         ? "border-4 border-yellow-100"
                         : "border-0"
-                    } flex h-10 w-10 items-center justify-center bg-yellow-300`}
+                    } flex h-10 w-10 bg-yellow-300`}
                   >
                     <input
                       className="hidden"
@@ -106,7 +106,7 @@ function Header() {
                       deck.colour === "bg-green-300"
                         ? "border-4 border-green-100"
                         : "border-0"
-                    } flex h-10 w-10 items-center justify-center bg-green-300`}
+                    } flex h-10 w-10 bg-green-300`}
                   >
                     <input
                       className="hidden"
@@ -124,7 +124,7 @@ function Header() {
                       deck.colour === "bg-teal-300"
                         ? "border-4 border-teal-100"
                         : "border-0"
-                    } flex h-10 w-10 items-center justify-center bg-teal-300`}
+                    } flex h-10 w-10 bg-teal-300`}
                   >
                     <input
                       className="hidden"
@@ -142,7 +142,7 @@ function Header() {
                       deck.colour === "bg-blue-300"
                         ? "border-4 border-blue-100"
                         : "border-0"
-                    } flex h-10 w-10 items-center justify-center bg-blue-300`}
+                    } flex h-10 w-10 bg-blue-300`}
                   >
                     <input
                       className="hidden"
@@ -160,7 +160,7 @@ function Header() {
                       deck.colour === "bg-indigo-300"
                         ? "border-4 border-indigo-100"
                         : "border-0"
-                    } flex h-10 w-10 items-center justify-center bg-indigo-300`}
+                    } flex h-10 w-10 bg-indigo-300`}
                   >
                     <input
                       className="hidden"
@@ -178,7 +178,7 @@ function Header() {
                       deck.colour === "bg-purple-300"
                         ? "border-4 border-purple-100"
                         : "border-0"
-                    } flex h-10 w-10 items-center justify-center bg-purple-300`}
+                    } flex h-10 w-10 bg-purple-300`}
                   >
                     <input
                       className="hidden"
@@ -196,7 +196,7 @@ function Header() {
                       deck.colour === "bg-pink-300"
                         ? "border-4 border-pink-100"
                         : "border-0"
-                    } flex h-10 w-10 items-center justify-center bg-pink-300`}
+                    } flex h-10 w-10 bg-pink-300`}
                   >
                     <input
                       className="hidden"
