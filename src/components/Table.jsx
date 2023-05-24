@@ -22,7 +22,7 @@ function Table() {
     setCards([...cards, newCard]);
   }
 
-  function handleChange(event, index) {
+  function handleTextarea(event, index) {
     const { name, value } = event.target;
     const updatedCards = [...cards];
     updatedCards[index] = { ...updatedCards[index], [name]: value };
@@ -87,7 +87,7 @@ function Table() {
                   name="front"
                   rows="4"
                   value={card.front}
-                  onChange={(event) => handleChange(event, index)}
+                  onChange={(event) => handleTextarea(event, index)}
                 />
               </td>
               <td className="relative border text-left align-top">
@@ -97,7 +97,7 @@ function Table() {
                   name="back"
                   rows="4"
                   value={card.back}
-                  onChange={(event) => handleChange(event, index)}
+                  onChange={(event) => handleTextarea(event, index)}
                 />
               </td>
             </tr>
