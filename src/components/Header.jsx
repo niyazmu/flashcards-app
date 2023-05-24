@@ -111,6 +111,9 @@ function Header() {
             </div>
           </div>
           <Table />
+          <button className="mt-8 w-full rounded bg-blue-500 py-3 text-white">
+            Create deck
+          </button>
         </form>
       </Modal>
     </>
