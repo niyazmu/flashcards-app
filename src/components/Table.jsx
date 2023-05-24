@@ -8,7 +8,8 @@ function Table() {
   ]);
   const [selectAll, setSelectAll] = useState(false);
 
-  function addCard() {
+  function addCard(event) {
+    event.preventDefault();
     const newCard = {
       card_id: 2,
       front: "",
@@ -19,7 +20,8 @@ function Table() {
     setCards([...cards, newCard]);
   }
 
-  function deleteCards() {
+  function deleteCards(event) {
+    event.preventDefault();
     const updatedCards = cards.filter((card) => !card.selected);
     setCards(updatedCards);
   }
@@ -68,13 +70,13 @@ function Table() {
         <div className="flex w-1/4 justify-end space-x-2">
           <button
             className="rounded bg-red-500 px-4 py-1 text-white"
-            onClick={deleteCards}
+            onClick={(event) => deleteCards(event)}
           >
             Delete
           </button>
           <button
             className="rounded bg-blue-500 px-4 py-1 text-white"
-            onClick={addCard}
+            onClick={(event) => addCard(event)}
           >
             Add
           </button>
