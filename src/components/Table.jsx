@@ -19,6 +19,11 @@ function Table() {
     setCards([...cards, newCard]);
   }
 
+  function deleteCards() {
+    const updatedCards = cards.filter((card) => !card.selected);
+    setCards(updatedCards);
+  }
+
   function handleTextarea(event, index) {
     const { name, value } = event.target;
     const updatedCards = [...cards];
@@ -53,11 +58,6 @@ function Table() {
         return card;
       }
     });
-    setCards(updatedCards);
-  }
-
-  function deleteCards() {
-    const updatedCards = cards.filter((card) => !card.selected);
     setCards(updatedCards);
   }
 
