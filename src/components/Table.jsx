@@ -31,17 +31,17 @@ function Table() {
             <td className="border p-3">
               <input type="checkbox" />
             </td>
-            <td className="border text-left align-top">
+            <td className="relative border text-left align-top">
               <textarea
-                className="w-full resize-none p-3 focus:text-blue-500 focus:outline-double focus:outline-blue-500"
+                className="block h-full w-full resize-none p-3 focus:text-blue-500 focus:outline-double focus:outline-blue-500"
                 type="text"
                 name="front"
                 rows="4"
               />
             </td>
-            <td className="border text-left align-top">
+            <td className="relative border text-left align-top">
               <textarea
-                className="w-full resize-none p-3 focus:text-blue-500 focus:outline-double focus:outline-blue-500"
+                className="block h-full w-full resize-none p-3 focus:text-blue-500 focus:outline-double focus:outline-blue-500"
                 type="text"
                 name="back"
                 rows="4"
