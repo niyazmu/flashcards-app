@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import Modal from "./Modal.jsx";
 import Swatch from "./Swatch.jsx";
+import Table from "./Table.jsx";
 
 function Header() {
   const [modal, setModal] = useState(false);
@@ -108,6 +109,7 @@ function Header() {
               </fieldset>
             </div>
           </div>
+          <Table />
         </form>
       </Modal>
     </>

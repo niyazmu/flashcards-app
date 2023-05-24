@@ -1,9 +1,9 @@
-import Table from "./components/Table.jsx";
+import Header from "./components/Header.jsx";
 
 function App() {
   return (
     <>
-      <Table />
+      <Header />
     </>
   );
 }

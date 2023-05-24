@@ -5,14 +5,8 @@ function Table() {
     { card_id: 1, front: "", back: "", deck_id: 1, selected: false },
     { card_id: 2, front: "", back: "", deck_id: 1, selected: false },
     { card_id: 3, front: "", back: "", deck_id: 1, selected: false },
-    { card_id: 4, front: "", back: "", deck_id: 1, selected: false },
-    { card_id: 5, front: "", back: "", deck_id: 2, selected: false },
-    { card_id: 6, front: "", back: "", deck_id: 2, selected: false },
   ]);
   const [selectAll, setSelectAll] = useState(false);
-
-  console.log(cards);
-  console.log(selectAll);
 
   function addCard() {
     const newCard = {
