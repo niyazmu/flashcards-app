@@ -3,8 +3,6 @@ import React, { useState } from "react";
 function Table() {
   const [cards, setCards] = useState([
     { card_id: 1, front: "", back: "", deck_id: 1, selected: false },
-    { card_id: 2, front: "", back: "", deck_id: 1, selected: false },
-    { card_id: 3, front: "", back: "", deck_id: 1, selected: false },
   ]);
   const [selectAll, setSelectAll] = useState(false);
 
