@@ -48,27 +48,29 @@ function Table() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td className="border p-3">
-              <input type="checkbox" />
-            </td>
-            <td className="relative border text-left align-top">
-              <textarea
-                className="block h-full w-full resize-none p-3 focus:text-blue-500 focus:outline-double focus:outline-blue-500"
-                type="text"
-                name="front"
-                rows="4"
-              />
-            </td>
-            <td className="relative border text-left align-top">
-              <textarea
-                className="block h-full w-full resize-none p-3 focus:text-blue-500 focus:outline-double focus:outline-blue-500"
-                type="text"
-                name="back"
-                rows="4"
-              />
-            </td>
-          </tr>
+          {cards.map((card, index) => (
+            <tr key={index}>
+              <td className="border p-3">
+                <input type="checkbox" />
+              </td>
+              <td className="relative border text-left align-top">
+                <textarea
+                  className="block h-full w-full resize-none p-3 focus:text-blue-500 focus:outline-double focus:outline-blue-500"
+                  type="text"
+                  name="front"
+                  rows="4"
+                />
+              </td>
+              <td className="relative border text-left align-top">
+                <textarea
+                  className="block h-full w-full resize-none p-3 focus:text-blue-500 focus:outline-double focus:outline-blue-500"
+                  type="text"
+                  name="back"
+                  rows="4"
+                />
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </>
