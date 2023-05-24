@@ -7,6 +7,7 @@ import Table from "./Table.jsx";
 function Header() {
   const [modal, setModal] = useState(false);
   const [deck, setDeck] = useState({
+    deck_id: 1,
     name: "",
     colour: "bg-red-300",
   });
