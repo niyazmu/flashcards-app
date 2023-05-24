@@ -17,6 +17,13 @@ function Table() {
     setCards([...cards, newCard]);
   }
 
+  function handleChange(event, index) {
+    const { name, value } = event.target;
+    const updatedCards = [...cards];
+    updatedCards[index] = { ...updatedCards[index], [name]: value };
+    setCards(updatedCards);
+  }
+
   return (
     <>
       <div className="mb-2 flex w-full justify-between">
@@ -59,6 +66,8 @@ function Table() {
                   type="text"
                   name="front"
                   rows="4"
+                  value={card.front}
+                  onChange={(event) => handleChange(event, index)}
                 />
               </td>
               <td className="relative border text-left align-top">
@@ -67,6 +76,8 @@ function Table() {
                   type="text"
                   name="back"
                   rows="4"
+                  value={card.back}
+                  onChange={(event) => handleChange(event, index)}
                 />
               </td>
             </tr>
