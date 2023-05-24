@@ -1,4 +1,22 @@
+import React, { useState } from "react";
+
 function Table() {
+  const [cards, setCards] = useState([
+    { card_id: 1, front: "", back: "", deck_id: 1, selected: false },
+  ]);
+  console.log(cards);
+
+  function addCard() {
+    const newCard = {
+      card_id: 2,
+      front: "",
+      back: "",
+      deck_id: 1,
+      selected: false,
+    };
+    setCards([...cards, newCard]);
+  }
+
   return (
     <>
       <div className="mb-2 flex w-full justify-between">
@@ -7,7 +25,10 @@ function Table() {
           <button className="rounded bg-red-500 px-4 py-1 text-white">
             Delete
           </button>
-          <button className="rounded bg-blue-500 px-4 py-1 text-white">
+          <button
+            className="rounded bg-blue-500 px-4 py-1 text-white"
+            onClick={addCard}
+          >
             Add
           </button>
         </div>
