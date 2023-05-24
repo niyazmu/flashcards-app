@@ -3,6 +3,11 @@ import React, { useState } from "react";
 function Table() {
   const [cards, setCards] = useState([
     { card_id: 1, front: "", back: "", deck_id: 1, selected: false },
+    { card_id: 2, front: "", back: "", deck_id: 1, selected: false },
+    { card_id: 3, front: "", back: "", deck_id: 1, selected: false },
+    { card_id: 4, front: "", back: "", deck_id: 1, selected: false },
+    { card_id: 5, front: "", back: "", deck_id: 2, selected: false },
+    { card_id: 6, front: "", back: "", deck_id: 2, selected: false },
   ]);
   console.log(cards);
 
@@ -21,6 +26,17 @@ function Table() {
     const { name, value } = event.target;
     const updatedCards = [...cards];
     updatedCards[index] = { ...updatedCards[index], [name]: value };
+    setCards(updatedCards);
+  }
+
+  function handleSelect(id) {
+    const updatedCards = cards.map((card) => {
+      if (card.card_id === id) {
+        return { ...card, selected: !card.selected };
+      } else {
+        return card;
+      }
+    });
     setCards(updatedCards);
   }
 
@@ -58,7 +74,11 @@ function Table() {
           {cards.map((card, index) => (
             <tr key={index}>
               <td className="border p-3">
-                <input type="checkbox" />
+                <input
+                  type="checkbox"
+                  checked={card.selected}
+                  onChange={() => handleSelect(card.card_id)}
+                />
               </td>
               <td className="relative border text-left align-top">
                 <textarea
