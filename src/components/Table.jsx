@@ -64,7 +64,7 @@ function Table() {
   return (
     <>
       <div className="mb-2 flex w-full justify-between">
-        <h2 className="text-left text-2xl font-medium">Cards</h2>
+        <h2 className="text-left text-xl font-medium">Cards</h2>
         <div className="flex w-1/4 justify-end space-x-2">
           <button
             className="rounded bg-red-500 px-4 py-1 text-white"
