@@ -9,7 +9,10 @@ function Table() {
     { card_id: 5, front: "", back: "", deck_id: 2, selected: false },
     { card_id: 6, front: "", back: "", deck_id: 2, selected: false },
   ]);
+  const [selectAll, setSelectAll] = useState(false);
+
   console.log(cards);
+  console.log(selectAll);
 
   function addCard() {
     const newCard = {
@@ -27,6 +30,25 @@ function Table() {
     const updatedCards = [...cards];
     updatedCards[index] = { ...updatedCards[index], [name]: value };
     setCards(updatedCards);
+  }
+
+  function handleSelectAll() {
+    setSelectAll(!selectAll);
+
+    // No idea why when selectAll is 'false' it selects all when it should be the other way around.
+    if (selectAll === false) {
+      const updatedCards = cards.map((card) => {
+        return { ...card, selected: true };
+      });
+      setCards(updatedCards);
+    }
+
+    if (selectAll === true) {
+      const updatedCards = cards.map((card) => {
+        return { ...card, selected: false };
+      });
+      setCards(updatedCards);
+    }
   }
 
   function handleSelect(id) {
@@ -68,7 +90,11 @@ function Table() {
         <thead className="text-left">
           <tr>
             <th className="w-10 border border-b-2 bg-slate-50 p-3 font-medium">
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                checked={selectAll}
+                onChange={handleSelectAll}
+              />
             </th>
             <th className="w-1/2 border border-b-2 bg-slate-50 p-3 font-medium">
               Front
