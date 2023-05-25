@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 
-function Table() {
-  const [cards, setCards] = useState([
-    { card_id: 1, front: "", back: "", deck_id: 1, selected: false },
-  ]);
+function Table({ cards, setCards }) {
   const [selectAll, setSelectAll] = useState(false);
 
   function addCard(event) {

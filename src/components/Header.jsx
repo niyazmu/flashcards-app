@@ -11,6 +11,9 @@ function Header() {
     name: "",
     colour: "bg-red-300",
   });
+  const [cards, setCards] = useState([
+    { card_id: 1, front: "", back: "", deck_id: 1, selected: false },
+  ]);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -110,7 +113,7 @@ function Header() {
               </fieldset>
             </div>
           </div>
-          <Table />
+          <Table cards={cards} setCards={setCards} />
           <button className="mt-8 w-full rounded bg-blue-500 py-3 text-white">
             Create deck
           </button>

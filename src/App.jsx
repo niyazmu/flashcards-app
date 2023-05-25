@@ -2,6 +2,7 @@ import supabase from "./supabaseClient";
 
 import { useState, useEffect } from "react";
 
+import Header from "./components/Header.jsx";
 import Main from "./components/Main.jsx";
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
 
   return (
     <>
+      <Header />
       <Main decks={decks} cards={cards} />
     </>
   );
