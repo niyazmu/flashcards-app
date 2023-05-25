@@ -1,3 +1,5 @@
+import supabase from "../../supabaseClient";
+
 import Deck from "./Deck.jsx";
 
 function Main() {
