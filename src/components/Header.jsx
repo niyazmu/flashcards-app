@@ -6,18 +6,18 @@ import Table from "./Table.jsx";
 
 function Header() {
   const [modal, setModal] = useState(false);
-  const [deck, setDeck] = useState({
+  const [newDeck, setNewDeck] = useState({
     deck_id: 1,
     name: "",
     colour: "bg-red-300",
   });
-  const [cards, setCards] = useState([
+  const [newCards, setNewCards] = useState([
     { card_id: 1, front: "", back: "", deck_id: 1, selected: false },
   ]);
 
   function handleChange(event) {
     const { name, value } = event.target;
-    setDeck((prevDeckData) => {
+    setNewDeck((prevDeckData) => {
       return {
         ...prevDeckData,
         [name]: value,
@@ -47,7 +47,7 @@ function Header() {
                 className="w-full rounded border p-2 focus:text-blue-500 focus:outline-blue-500"
                 type="text"
                 name="name"
-                value={deck.name}
+                value={newDeck.name}
                 onChange={handleChange}
               />
             </div>
@@ -58,62 +58,62 @@ function Header() {
                   <Swatch
                     colour="bg-red-300"
                     borderColour="border-red-100"
-                    checked={deck.colour === "bg-red-300"}
+                    checked={newDeck.colour === "bg-red-300"}
                     handleChange={handleChange}
                   />
                   <Swatch
                     colour="bg-orange-300"
                     borderColour="border-orange-100"
-                    checked={deck.colour === "bg-orange-300"}
+                    checked={newDeck.colour === "bg-orange-300"}
                     handleChange={handleChange}
                   />
                   <Swatch
                     colour="bg-yellow-300"
                     borderColour="border-yellow-100"
-                    checked={deck.colour === "bg-yellow-300"}
+                    checked={newDeck.colour === "bg-yellow-300"}
                     handleChange={handleChange}
                   />
                   <Swatch
                     colour="bg-green-300"
                     borderColour="border-green-100"
-                    checked={deck.colour === "bg-green-300"}
+                    checked={newDeck.colour === "bg-green-300"}
                     handleChange={handleChange}
                   />
                   <Swatch
                     colour="bg-teal-300"
                     borderColour="border-teal-100"
-                    checked={deck.colour === "bg-teal-300"}
+                    checked={newDeck.colour === "bg-teal-300"}
                     handleChange={handleChange}
                   />
                   <Swatch
                     colour="bg-blue-300"
                     borderColour="border-blue-100"
-                    checked={deck.colour === "bg-blue-300"}
+                    checked={newDeck.colour === "bg-blue-300"}
                     handleChange={handleChange}
                   />
                   <Swatch
                     colour="bg-indigo-300"
                     borderColour="border-indigo-100"
-                    checked={deck.colour === "bg-indigo-300"}
+                    checked={newDeck.colour === "bg-indigo-300"}
                     handleChange={handleChange}
                   />
                   <Swatch
                     colour="bg-purple-300"
                     borderColour="border-purple-100"
-                    checked={deck.colour === "bg-purple-300"}
+                    checked={newDeck.colour === "bg-purple-300"}
                     handleChange={handleChange}
                   />
                   <Swatch
                     colour="bg-pink-300"
                     borderColour="border-pink-100"
-                    checked={deck.colour === "bg-pink-300"}
+                    checked={newDeck.colour === "bg-pink-300"}
                     handleChange={handleChange}
                   />
                 </div>
               </fieldset>
             </div>
           </div>
-          <Table cards={cards} setCards={setCards} />
+          <Table cards={newCards} setCards={setNewCards} />
           <button className="mt-8 w-full rounded bg-blue-500 py-3 text-white">
             Create deck
           </button>
