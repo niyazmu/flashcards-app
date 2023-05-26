@@ -17,9 +17,9 @@ function Header() {
 
   function handleChange(event) {
     const { name, value } = event.target;
-    setNewDeck((prevDeckData) => {
+    setNewDeck((prevNewDeckData) => {
       return {
-        ...prevDeckData,
+        ...prevNewDeckData,
         [name]: value,
       };
     });
