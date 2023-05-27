@@ -18,6 +18,9 @@ function Table({ cards, setCards }) {
     event.preventDefault();
     const updatedCards = cards.filter((card) => !card.selected);
     setCards(updatedCards);
+    if (updatedCards.length === 0) {
+      setSelectAll(false);
+    }
   }
 
   function handleTextarea(event, index) {
