@@ -12,7 +12,7 @@ function Header() {
     colour: "bg-red-300",
   });
   const [newCards, setNewCards] = useState([
-    { card_id: 1, front: "", back: "", deck_id: 1, selected: false },
+    { front: "", back: "", deck_id: 1, selected: false },
   ]);
 
   function handleChange(event) {

@@ -6,7 +6,6 @@ function Table({ cards, setCards }) {
   function addCard(event) {
     event.preventDefault();
     const newCard = {
-      card_id: 2,
       front: "",
       back: "",
       deck_id: 1,
@@ -47,9 +46,9 @@ function Table({ cards, setCards }) {
     }
   }
 
-  function handleSelect(id) {
-    const updatedCards = cards.map((card) => {
-      if (card.card_id === id) {
+  function handleSelect(index) {
+    const updatedCards = cards.map((card, i) => {
+      if (i === index) {
         return { ...card, selected: !card.selected };
       } else {
         return card;
@@ -102,7 +101,7 @@ function Table({ cards, setCards }) {
                 <input
                   type="checkbox"
                   checked={card.selected}
-                  onChange={() => handleSelect(card.card_id)}
+                  onChange={() => handleSelect(index)}
                 />
               </td>
               <td className="relative border text-left align-top">
