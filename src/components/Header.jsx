@@ -48,6 +48,7 @@ function Header() {
                 type="text"
                 name="name"
                 value={newDeck.name}
+                maxlength="32"
                 onChange={handleChange}
               />
             </div>
