@@ -4,7 +4,7 @@ function Swatch({ colour, borderColour, checked, handleChange }) {
       htmlFor={colour}
       className={`${
         checked ? "border-4 " + borderColour : "border-0"
-      } flex h-10 w-10 ${colour}`}
+      } custom-h custom-w flex ${colour}`}
     >
       <input
         className="hidden"
