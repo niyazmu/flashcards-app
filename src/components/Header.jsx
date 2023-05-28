@@ -114,7 +114,7 @@ function Header() {
             </div>
           </div>
           <Table cards={newCards} setCards={setNewCards} />
-          <button className="mt-8 w-full rounded bg-blue-500 py-3 text-white">
+          <button className="mt-8 w-full rounded bg-blue-500 p-4 text-white">
             Create deck
           </button>
         </form>
