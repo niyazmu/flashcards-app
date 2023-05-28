@@ -44,7 +44,7 @@ function Header() {
                 Name
               </label>
               <input
-                className="w-full rounded border p-2 focus:text-blue-500 focus:outline-blue-500"
+                className="w-full rounded border p-3 focus:text-blue-500 focus:outline-blue-500"
                 type="text"
                 name="name"
                 value={newDeck.name}
