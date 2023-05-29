@@ -14,6 +14,7 @@ function Header() {
   const [newCards, setNewCards] = useState([
     { front: "", back: "", deck_id: 1, selected: false },
   ]);
+  const [nameError, setNameError] = useState(false);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -23,6 +24,15 @@ function Header() {
         [name]: value,
       };
     });
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (newDeck.name === "") {
+      setNameError(true);
+    } else {
+      setNameError(false);
+    }
   }
 
   return (
@@ -37,20 +47,29 @@ function Header() {
         isVisible={modal}
         close={() => setModal(false)}
       >
-        <form>
+        <form onSubmit={(event) => handleSubmit(event)}>
           <div className="my-8 flex space-x-8">
             <div className="w-1/2">
               <label className="mb-2 block font-medium" htmlFor="name">
                 Name
               </label>
               <input
-                className="w-full rounded border p-3 focus:text-blue-500 focus:outline-blue-500"
+                className={`w-full rounded border p-3  ${
+                  nameError
+                    ? "border-red-500 focus:outline-red-500"
+                    : "border focus:outline-blue-500 "
+                }`}
                 type="text"
                 name="name"
                 value={newDeck.name}
                 maxlength="32"
                 onChange={handleChange}
               />
+              {nameError && (
+                <span className="text-sm italic text-red-500">
+                  * Please enter a name.
+                </span>
+              )}
             </div>
             <div className="w-1/2">
               <fieldset>
