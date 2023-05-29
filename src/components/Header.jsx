@@ -29,7 +29,7 @@ function Header() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (newDeck.name === "") {
+    if (newDeck.name.trim() === "") {
       setNameError(true);
     } else {
       setNameError(false);
