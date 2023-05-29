@@ -27,16 +27,15 @@ function Header() {
     });
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  function handleErrors() {
+    const isAnyCardEmpty = newCards.some(
+      (card) => card.front.trim() === "" || card.back.trim() === ""
+    );
     if (newDeck.name.trim() === "") {
       setNameError(true);
     } else {
       setNameError(false);
     }
-    const isAnyCardEmpty = newCards.some(
-      (card) => card.front.trim() === "" || card.back.trim() === ""
-    );
     if (isAnyCardEmpty) {
       setCardError(true);
     } else {
@@ -44,15 +43,20 @@ function Header() {
     }
   }
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    handleErrors();
+  }
+
   return (
     <>
       <header>
-        <button className="btn-primary" onClick={() => setModal(true)}>
-          Create deck
+        <button className="" onClick={() => setModal(true)}>
+          Create flashcards
         </button>
       </header>
       <Modal
-        heading="Create deck"
+        heading="Create flashcards"
         isVisible={modal}
         close={() => setModal(false)}
       >
@@ -148,7 +152,7 @@ function Header() {
             cardError={cardError}
           />
           <button className="mt-8 w-full rounded bg-blue-500 p-4 text-white">
-            Create deck
+            Create flashcards
           </button>
         </form>
       </Modal>
