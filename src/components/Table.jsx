@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Table({ cards, setCards }) {
+function Table({ cards, setCards, cardError }) {
   const [selectAll, setSelectAll] = useState(false);
 
   function addCard(event) {
@@ -109,7 +109,7 @@ function Table({ cards, setCards }) {
               </td>
               <td className="relative border text-left align-top">
                 <textarea
-                  className="block h-full w-full resize-none p-3 focus:text-blue-500 focus:outline-double focus:outline-blue-500"
+                  className="box-border block h-full w-full resize-none border-blue-500 p-3 outline-0 focus:border-2"
                   type="text"
                   name="front"
                   rows="4"
@@ -119,7 +119,7 @@ function Table({ cards, setCards }) {
               </td>
               <td className="relative border text-left align-top">
                 <textarea
-                  className="block h-full w-full resize-none p-3 focus:text-blue-500 focus:outline-double focus:outline-blue-500"
+                  className="box-border block h-full w-full resize-none border-blue-500 p-3 outline-0 focus:border-2"
                   type="text"
                   name="back"
                   rows="4"
@@ -130,6 +130,17 @@ function Table({ cards, setCards }) {
             </tr>
           ))}
         </tbody>
+        <tfoot class="table-footer-group">
+          <tr>
+            <td colspan="3">
+              {cardError && (
+                <span className="text-sm italic text-red-500">
+                  * Please fill in both the front and back of the card(s).
+                </span>
+              )}
+            </td>
+          </tr>
+        </tfoot>
       </table>
     </>
   );

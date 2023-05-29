@@ -15,6 +15,7 @@ function Header() {
     { front: "", back: "", deck_id: 1, selected: false },
   ]);
   const [nameError, setNameError] = useState(false);
+  const [cardError, setCardError] = useState(false);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -32,6 +33,14 @@ function Header() {
       setNameError(true);
     } else {
       setNameError(false);
+    }
+    const isAnyCardEmpty = newCards.some(
+      (card) => card.front.trim() === "" || card.back.trim() === ""
+    );
+    if (isAnyCardEmpty) {
+      setCardError(true);
+    } else {
+      setCardError(false);
     }
   }
 
@@ -54,7 +63,7 @@ function Header() {
                 Name
               </label>
               <input
-                className={`w-full rounded border p-3  ${
+                className={`w-full rounded border p-3 ${
                   nameError
                     ? "border-red-500 focus:outline-red-500"
                     : "border focus:outline-blue-500 "
@@ -133,7 +142,11 @@ function Header() {
               </fieldset>
             </div>
           </div>
-          <Table cards={newCards} setCards={setNewCards} />
+          <Table
+            cards={newCards}
+            setCards={setNewCards}
+            cardError={cardError}
+          />
           <button className="mt-8 w-full rounded bg-blue-500 p-4 text-white">
             Create deck
           </button>
