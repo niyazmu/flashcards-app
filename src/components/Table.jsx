@@ -130,9 +130,9 @@ function Table({ cards, setCards, cardError }) {
             </tr>
           ))}
         </tbody>
-        <tfoot class="table-footer-group">
+        <tfoot className="table-footer-group">
           <tr>
-            <td colspan="3">
+            <td colSpan="3">
               {cardError && (
                 <span className="text-sm italic text-red-500">
                   * Please fill in both the front and back of the card(s).
