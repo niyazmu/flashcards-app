@@ -40,7 +40,7 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header decks={decks} />
       <Main decks={decks} cards={cards} />
     </>
   );

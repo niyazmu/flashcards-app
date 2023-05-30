@@ -1,21 +1,31 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Modal from "./Modal.jsx";
 import Swatch from "./Swatch.jsx";
 import Table from "./Table.jsx";
 
-function Header() {
+function Header({ decks }) {
   const [modal, setModal] = useState(false);
-  const [newDeck, setNewDeck] = useState({
-    deck_id: 1,
-    name: "",
-    colour: "bg-red-300",
-  });
-  const [newCards, setNewCards] = useState([
-    { front: "", back: "", deck_id: 1, selected: false },
-  ]);
+  const [newDeck, setNewDeck] = useState({});
+  const [newCards, setNewCards] = useState([]);
   const [nameError, setNameError] = useState(false);
   const [cardError, setCardError] = useState(false);
+
+  useEffect(() => {
+    getNextDeckId();
+  }, [modal]);
+
+  function getNextDeckId() {
+    const lastDeckIndex = decks.length - 1;
+    const isDecksEmpty = decks.length === 0;
+    const newDeckId = isDecksEmpty ? 1 : decks[lastDeckIndex].deck_id + 1;
+    setNewDeck({
+      deck_id: newDeckId,
+      name: "",
+      colour: "bg-red-300",
+    });
+    setNewCards([{ front: "", back: "", deck_id: newDeckId, selected: false }]);
+  }
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -150,6 +160,7 @@ function Header() {
             cards={newCards}
             setCards={setNewCards}
             cardError={cardError}
+            deck_id={newDeck.deck_id}
           />
           <button className="mt-8 w-full rounded bg-blue-500 p-4 text-white">
             Create flashcards
