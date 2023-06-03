@@ -45,11 +45,8 @@ function CreateForm({ modal, decks }) {
     });
   }
 
-  function handleErrors() {
-    const isAnyCardEmpty = newCards.some(
-      (card) => card.front.trim() === "" || card.back.trim() === ""
-    );
-    if (newDeck.name.trim() === "") {
+  function handleErrors(isDeckNameEmpty, isAnyCardEmpty) {
+    if (isDeckNameEmpty) {
       setNameError(true);
     } else {
       setNameError(false);
@@ -61,9 +58,16 @@ function CreateForm({ modal, decks }) {
     }
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    handleErrors();
+    const isAnyCardEmpty = newCards.some(
+      (card) => card.front.trim() === "" || card.back.trim() === ""
+    );
+    const isDeckNameEmpty = newDeck.name.trim() === "";
+    handleErrors(isDeckNameEmpty, isAnyCardEmpty);
+    if (!isDeckNameEmpty && !isAnyCardEmpty) {
+      console.log("pass");
+    }
   }
 
   return (
