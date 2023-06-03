@@ -28,8 +28,8 @@ function CreateForm({ modal, decks }) {
       deck_id: newDeckId,
     }));
     setNewCards((prevNewCards) =>
-      prevNewCards.map((card) => ({
-        ...card,
+      prevNewCards.map((prevNewCard) => ({
+        ...prevNewCard,
         deck_id: newDeckId,
       }))
     );
@@ -37,9 +37,9 @@ function CreateForm({ modal, decks }) {
 
   function handleChange(event) {
     const { name, value } = event.target;
-    setNewDeck((prevNewDeckData) => {
+    setNewDeck((prevNewDeck) => {
       return {
-        ...prevNewDeckData,
+        ...prevNewDeck,
         [name]: value,
       };
     });
