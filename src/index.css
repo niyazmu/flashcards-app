@@ -1,11 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-.custom-h {
-  height: 3.15rem;
-}
-
-.custom-w {
-  width: 3.15rem;
-}
