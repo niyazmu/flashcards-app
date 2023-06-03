@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import supabase from "../supabaseClient.js";
+
 import Swatch from "./Swatch.jsx";
 import Table from "./Table.jsx";
 
@@ -66,7 +68,19 @@ function CreateForm({ modal, decks }) {
     const isDeckNameEmpty = newDeck.name.trim() === "";
     handleErrors(isDeckNameEmpty, isAnyCardEmpty);
     if (!isDeckNameEmpty && !isAnyCardEmpty) {
-      console.log("pass");
+      try {
+        const { data, error } = await supabase.from("decks").insert(newDeck);
+        if (error) throw error;
+      } catch (error) {
+        alert(error.message);
+      }
+      try {
+        const { data, error } = await supabase.from("cards").insert(newCards);
+        if (error) throw error;
+      } catch (error) {
+        alert(error.message);
+      }
+      window.location.reload();
     }
   }
 
