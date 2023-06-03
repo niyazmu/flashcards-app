@@ -40,8 +40,10 @@ function App() {
 
   return (
     <>
-      <Header decks={decks} />
-      <Main decks={decks} cards={cards} />
+      <div className="container mx-auto">
+        <Header decks={decks} />
+        <Main decks={decks} cards={cards} />
+      </div>
     </>
   );
 }
