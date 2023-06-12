@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import Deck from "./Deck.jsx";
 
 function Main({ decks, cards }) {
@@ -12,12 +14,14 @@ function Main({ decks, cards }) {
       <main>
         <div className="grid grid-cols-4 gap-8">
           {decks.map((deck) => (
-            <Deck
-              key={deck.deck_id}
-              name={deck.name}
-              numberOfCards={countCards(deck.deck_id)}
-              colour={deck.colour}
-            />
+            <Link to={`/${deck.deck_id}`}>
+              <Deck
+                key={deck.deck_id}
+                name={deck.name}
+                numberOfCards={countCards(deck.deck_id)}
+                colour={deck.colour}
+              />
+            </Link>
           ))}
         </div>
       </main>
