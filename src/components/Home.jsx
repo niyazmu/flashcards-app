@@ -1,43 +1,7 @@
-import supabase from "../supabaseClient";
-
-import { useState, useEffect } from "react";
-
 import Header from "./Header.jsx";
 import Main from "./Main.jsx";
 
-function Home() {
-  const [decks, setDecks] = useState([]);
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    fetchDecks();
-    fetchCards();
-  }, []);
-
-  async function fetchDecks() {
-    try {
-      const { data, error } = await supabase.from("decks").select("*");
-      if (error) throw error;
-      if (data != null) {
-        setDecks(data);
-      }
-    } catch (error) {
-      alert(error.message);
-    }
-  }
-
-  async function fetchCards() {
-    try {
-      const { data, error } = await supabase.from("cards").select("*");
-      if (error) throw error;
-      if (data != null) {
-        setCards(data);
-      }
-    } catch (error) {
-      alert(error.message);
-    }
-  }
-
+function Home({ decks, cards }) {
   return (
     <>
       <div className="container mx-auto">
