@@ -10,7 +10,7 @@ function Main({ decks, cards }) {
   return (
     <>
       <main>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-4 gap-8">
           {decks.map((deck) => (
             <Deck
               key={deck.deck_id}
