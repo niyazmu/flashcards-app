@@ -14,9 +14,8 @@ function Main({ decks, cards }) {
       <main>
         <div className="grid grid-cols-4 gap-8">
           {decks.map((deck) => (
-            <Link to={`/${deck.deck_id}`}>
+            <Link to={`/${deck.deck_id}`} key={deck.deck_id.toString()}>
               <Deck
-                key={deck.deck_id}
                 name={deck.name}
                 numberOfCards={countCards(deck.deck_id)}
                 colour={deck.colour}
