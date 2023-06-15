@@ -6,7 +6,13 @@ function DeckPage({ cards }) {
   const { deck_id } = useParams();
   const deckCards = cards.filter((card) => card.deck_id === parseInt(deck_id));
 
-  return <Carousel cards={deckCards} />;
+  return (
+    <>
+      <div className="h-screen w-screen bg-blue-400">
+        <Carousel cards={deckCards} />
+      </div>
+    </>
+  );
 }
 
 export default DeckPage;
