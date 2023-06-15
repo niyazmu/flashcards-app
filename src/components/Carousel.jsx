@@ -1,14 +1,15 @@
 import { useState } from "react";
 
 function Carousel({ cards }) {
-  console.log(cards);
+  const [flipped, setFlipped] = useState(false);
+
   return (
     <>
-      <div className="">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-      </div>
+      <div className="">{flipped ? cards[0].front : cards[0].back}</div>
       <button className="">Mark incorrect</button>
-      <button className="">Flip card</button>
+      <button className="" onClick={() => setFlipped(!flipped)}>
+        Flip card
+      </button>
       <button className="">Mark correct</button>
     </>
   );
