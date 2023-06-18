@@ -26,18 +26,29 @@ function Carousel({ cards }) {
 
   return (
     <>
-      <div className="">
-        {flipped ? cards[currentIndex].front : cards[currentIndex].back}
+      <div className="flex h-screen flex-col items-center justify-center">
+        <div className="h-1/2 w-1/2 rounded-2xl bg-white p-8">
+          {flipped ? (
+            <>
+              <h1 className="text-4xl"></h1>
+              <div className="my-16 text-xl">{cards[currentIndex].back}</div>
+            </>
+          ) : (
+            <h1 className="text-4xl">{cards[currentIndex].front}</h1>
+          )}
+        </div>
+        <div className="my-8 flex">
+          <button className="mx-4" onClick={markIncorrect}>
+            Mark incorrect
+          </button>
+          <button className="mx-4" onClick={() => setFlipped(!flipped)}>
+            Flip card
+          </button>
+          <button className="mx-4" onClick={markCorrect}>
+            Mark correct
+          </button>
+        </div>
       </div>
-      <button className="" onClick={markIncorrect}>
-        Mark incorrect
-      </button>
-      <button className="" onClick={() => setFlipped(!flipped)}>
-        Flip card
-      </button>
-      <button className="" onClick={markCorrect}>
-        Mark correct
-      </button>
     </>
   );
 }
