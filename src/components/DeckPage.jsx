@@ -8,7 +8,7 @@ function DeckPage({ cards }) {
 
   return (
     <>
-      <div className="h-screen w-screen bg-blue-400">
+      <div className="h-screen w-screen bg-fuchsia-400">
         <Carousel cards={deckCards} />
       </div>
     </>
