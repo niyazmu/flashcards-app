@@ -27,14 +27,17 @@ function Carousel({ cards }) {
   return (
     <>
       <div className="flex h-screen flex-col items-center justify-center">
-        <div className="h-1/2 w-1/2 rounded-2xl bg-white p-8">
+        <div className="flex h-1/2 w-1/2 flex-col justify-center rounded-2xl bg-white p-16">
           {flipped ? (
             <>
-              <h1 className="text-4xl"></h1>
-              <div className="my-16 text-xl">{cards[currentIndex].back}</div>
+              <div className="text-center text-2xl">
+                {cards[currentIndex].back}
+              </div>
             </>
           ) : (
-            <h1 className="text-4xl">{cards[currentIndex].front}</h1>
+            <div className="text-center text-4xl">
+              {cards[currentIndex].front}
+            </div>
           )}
         </div>
         <div className="my-8 flex">
