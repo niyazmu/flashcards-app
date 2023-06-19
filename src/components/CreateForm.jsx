@@ -9,7 +9,7 @@ function CreateForm({ modal, decks }) {
   const [newDeck, setNewDeck] = useState({
     deck_id: null,
     name: "",
-    colour: "bg-red-300",
+    colour: "bg-red-400",
   });
   const [newCards, setNewCards] = useState([
     { front: "", back: "", deck_id: null, selected: false },
