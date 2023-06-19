@@ -38,13 +38,22 @@ function Carousel({ cards }) {
           )}
         </div>
         <div className="my-8 flex">
-          <button className="mx-4" onClick={markIncorrect}>
+          <button
+            className="mx-2 rounded-full bg-fuchsia-500 px-8 py-4 text-white"
+            onClick={markIncorrect}
+          >
             Mark incorrect
           </button>
-          <button className="mx-4" onClick={() => setFlipped(!flipped)}>
+          <button
+            className="mx-2 rounded-full bg-fuchsia-500 px-8 py-4 text-white"
+            onClick={() => setFlipped(!flipped)}
+          >
             Flip card
           </button>
-          <button className="mx-4" onClick={markCorrect}>
+          <button
+            className="mx-2 rounded-full bg-fuchsia-500 px-8 py-4 text-white"
+            onClick={markCorrect}
+          >
             Mark correct
           </button>
         </div>
