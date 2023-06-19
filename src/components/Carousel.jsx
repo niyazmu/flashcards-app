@@ -3,10 +3,12 @@ import { useState } from "react";
 function Carousel({ cards }) {
   const [flipped, setFlipped] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [correctCount, setCorrectCount] = useState(0);
 
   function markCorrect() {
     setFlipped(false);
-    const lastIndex = cards.length;
+    setCorrectCount((prevCorrectCount) => prevCorrectCount + 1);
+    const lastIndex = cards.length; // this isn't the last index?
     const newIndex = currentIndex + 1;
     if (newIndex === lastIndex) {
       return; // stop incrementing
