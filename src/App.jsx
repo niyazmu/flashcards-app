@@ -45,7 +45,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="" element={<Home decks={decks} cards={cards} />}></Route>
-          <Route path=":deck_id" element={<DeckPage cards={cards} />}></Route>
+          <Route path=":deck_id" element={<DeckPage />}></Route>
         </Routes>
       </BrowserRouter>
     </>
