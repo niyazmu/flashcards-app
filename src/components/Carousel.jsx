@@ -28,6 +28,10 @@ function Carousel({ name, cards }) {
     setCurrentIndex(newIndex);
   }
 
+  function refresh() {
+    window.location.reload();
+  }
+
   return (
     <>
       <div className="flex h-screen flex-col items-center justify-center">
@@ -74,12 +78,21 @@ function Carousel({ name, cards }) {
             </div>
           </>
         ) : (
-          <div className="text-8xl font-bold uppercase text-fuchsia-500">
-            You scored {correctCount}/{numOfCards} <br />
-            You scored {correctCount}/{numOfCards} <br />
-            You scored {correctCount}/{numOfCards} <br />
-            You scored {correctCount}/{numOfCards}
-          </div>
+          <>
+            <div className="text-8xl font-bold uppercase text-fuchsia-500">
+              You scored {correctCount}/{numOfCards} <br />
+              You scored {correctCount}/{numOfCards} <br />
+              You scored {correctCount}/{numOfCards} <br />
+              You scored {correctCount}/{numOfCards} <br />
+              You scored {correctCount}/{numOfCards}
+            </div>
+            <button
+              className="mx-2 my-8 rounded-full bg-fuchsia-500 px-8 py-4 text-white"
+              onClick={refresh}
+            >
+              Retry
+            </button>
+          </>
         )}
       </div>
     </>
