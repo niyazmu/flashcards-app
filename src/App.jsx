@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./components/Home.jsx";
 import DeckPage from "./components/DeckPage.jsx";
+import NotFoundPage from "./components/NotFoundPage.jsx";
 
 function App() {
   const [decks, setDecks] = useState([]);
@@ -44,8 +45,9 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="" element={<Home decks={decks} cards={cards} />}></Route>
-          <Route path=":deck_id" element={<DeckPage />}></Route>
+          <Route path="/" element={<Home decks={decks} cards={cards} />} />
+          <Route path="/:deck_id" element={<DeckPage />} exact />
+          <Route path="/not-found" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </>

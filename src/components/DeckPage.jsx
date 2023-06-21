@@ -2,12 +2,13 @@ import supabase from "../supabaseClient";
 
 import { useState, useEffect } from "react";
 
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import Carousel from "./Carousel";
 
 function DeckPage() {
   const { deck_id } = useParams();
+  const navigate = useNavigate();
 
   const [cards, setCards] = useState([{}]);
 
@@ -26,7 +27,7 @@ function DeckPage() {
         setCards(data);
       }
     } catch (error) {
-      alert(error.message);
+      navigate("/not-found");
     }
   }
 
