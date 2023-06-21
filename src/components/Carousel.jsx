@@ -8,20 +8,20 @@ function Carousel({ cards }) {
   function markCorrect() {
     setFlipped(false);
     setCorrectCount((prevCorrectCount) => prevCorrectCount + 1);
-    const lastIndex = cards.length; // this isn't the last index?
+    const numOfCards = cards.length;
     const newIndex = currentIndex + 1;
-    if (newIndex === lastIndex) {
-      return; // stop incrementing
+    if (newIndex === numOfCards) {
+      return;
     }
     setCurrentIndex(newIndex);
   }
 
   function markIncorrect() {
     setFlipped(false);
-    const lastIndex = cards.length;
+    const numOfCards = cards.length;
     const newIndex = currentIndex + 1;
-    if (newIndex === lastIndex) {
-      return; // stop incrementing
+    if (newIndex === numOfCards) {
+      return;
     }
     setCurrentIndex(newIndex);
   }
