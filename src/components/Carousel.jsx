@@ -7,6 +7,7 @@ function Carousel({ name, cards }) {
   const [hideResult, setHideResult] = useState(true);
 
   const numOfCards = cards.length;
+  const shuffledCards = cards.sort(() => Math.random() - 0.5);
 
   function markCorrect() {
     setFlipped(false);
@@ -42,12 +43,12 @@ function Carousel({ name, cards }) {
               {flipped ? (
                 <>
                   <div className="text-center text-2xl">
-                    {cards[currentIndex].back}
+                    {shuffledCards[currentIndex].back}
                   </div>
                 </>
               ) : (
                 <div className="text-center text-4xl">
-                  {cards[currentIndex].front}
+                  {shuffledCards[currentIndex].front}
                 </div>
               )}
             </div>
