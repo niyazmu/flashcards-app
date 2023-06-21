@@ -10,11 +10,29 @@ function DeckPage() {
   const { deck_id } = useParams();
   const navigate = useNavigate();
 
+  const [name, setName] = useState();
   const [cards, setCards] = useState([{}]);
 
   useEffect(() => {
+    fetchName();
     fetchCards();
   }, []);
+
+  async function fetchName() {
+    try {
+      const { data, error } = await supabase
+        .from("decks")
+        .select("name")
+        .eq("deck_id", deck_id)
+        .limit(1);
+      if (error) throw error;
+      if (data != null) {
+        setName(data[0].name);
+      }
+    } catch (error) {
+      navigate("/not-found");
+    }
+  }
 
   async function fetchCards() {
     try {
@@ -34,7 +52,7 @@ function DeckPage() {
   return (
     <>
       <div className="h-screen w-screen bg-fuchsia-400">
-        <Carousel cards={cards} />
+        <Carousel name={name} cards={cards} />
       </div>
     </>
   );

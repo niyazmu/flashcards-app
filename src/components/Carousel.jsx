@@ -1,14 +1,15 @@
 import { useState } from "react";
 
-function Carousel({ cards }) {
+function Carousel({ name, cards }) {
   const [flipped, setFlipped] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
 
+  const numOfCards = cards.length;
+
   function markCorrect() {
     setFlipped(false);
     setCorrectCount((prevCorrectCount) => prevCorrectCount + 1);
-    const numOfCards = cards.length;
     const newIndex = currentIndex + 1;
     if (newIndex === numOfCards) {
       return;
@@ -18,7 +19,6 @@ function Carousel({ cards }) {
 
   function markIncorrect() {
     setFlipped(false);
-    const numOfCards = cards.length;
     const newIndex = currentIndex + 1;
     if (newIndex === numOfCards) {
       return;
@@ -29,6 +29,12 @@ function Carousel({ cards }) {
   return (
     <>
       <div className="flex h-screen flex-col items-center justify-center">
+        <div className="my-8 flex w-1/2 justify-between text-fuchsia-600">
+          <span>{name}</span>
+          <span>
+            {currentIndex + 1}/{numOfCards}
+          </span>
+        </div>
         <div className="flex h-1/2 w-1/2 flex-col justify-center rounded-2xl bg-white p-16">
           {flipped ? (
             <>
