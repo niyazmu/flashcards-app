@@ -82,12 +82,11 @@ function Carousel({ name, colour, cards }) {
           </>
         ) : (
           <>
-            <div className={`text-8xl font-bold uppercase text-${colour}-500`}>
-              You scored {correctCount}/{numOfCards} <br />
-              You scored {correctCount}/{numOfCards} <br />
-              You scored {correctCount}/{numOfCards} <br />
-              You scored {correctCount}/{numOfCards} <br />
-              You scored {correctCount}/{numOfCards}
+            <div className={`text-4xl font-medium  text-${colour}-500`}>
+              You scored <br />
+              <span className="text-8xl">
+                {correctCount} out of {numOfCards}
+              </span>
             </div>
             <button
               className={`mx-2 rounded-full bg-${colour}-500 my-8 px-8 py-4 text-white`}
