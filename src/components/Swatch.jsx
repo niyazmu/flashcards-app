@@ -3,7 +3,7 @@ function Swatch({ colour, checked, handleChange }) {
     <label
       htmlFor={colour}
       className={`${
-        checked ? `border-4 border-${colour}-500` : ""
+        checked ? `border-2 border-${colour}-600` : ""
       } flex h-[3.15rem] w-[3.15rem] bg-${colour}-400 rounded-sm`}
     >
       <input
