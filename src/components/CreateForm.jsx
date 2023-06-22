@@ -9,7 +9,7 @@ function CreateForm({ modal, decks }) {
   const [newDeck, setNewDeck] = useState({
     deck_id: null,
     name: "",
-    colour: "bg-red-400",
+    colour: "red",
   });
   const [newCards, setNewCards] = useState([
     { front: "", back: "", deck_id: null, selected: false },
@@ -114,105 +114,88 @@ function CreateForm({ modal, decks }) {
             <legend className="mb-2 block font-medium">Colours</legend>
             <div className="flex flex-wrap gap-2">
               <Swatch
-                colour="bg-red-400"
-                borderColour="border-red-100"
-                checked={newDeck.colour === "bg-red-400"}
+                colour="red"
+                checked={newDeck.colour === "red"}
                 handleChange={handleChange}
               />
               <Swatch
-                colour="bg-orange-400"
-                borderColour="border-orange-100"
-                checked={newDeck.colour === "bg-orange-400"}
+                colour="orange"
+                checked={newDeck.colour === "orange"}
                 handleChange={handleChange}
               />
               <Swatch
-                colour="bg-amber-400"
-                borderColour="border-amber-100"
-                checked={newDeck.colour === "bg-amber-400"}
+                colour="amber"
+                checked={newDeck.colour === "amber"}
                 handleChange={handleChange}
               />
               <Swatch
-                colour="bg-yellow-400"
-                borderColour="border-yellow-100"
-                checked={newDeck.colour === "bg-yellow-400"}
+                colour="yellow"
+                checked={newDeck.colour === "yellow"}
                 handleChange={handleChange}
               />
               <Swatch
-                colour="bg-lime-400"
-                borderColour="border-lime-100"
-                checked={newDeck.colour === "bg-lime-400"}
+                colour="lime"
+                checked={newDeck.colour === "lime"}
                 handleChange={handleChange}
               />
               <Swatch
-                colour="bg-green-400"
-                borderColour="border-green-100"
-                checked={newDeck.colour === "bg-green-400"}
+                colour="green"
+                checked={newDeck.colour === "green"}
                 handleChange={handleChange}
               />
               <Swatch
-                colour="bg-emerald-400"
-                borderColour="border-emerald-100"
-                checked={newDeck.colour === "bg-emerald-400"}
+                colour="emerald"
+                checked={newDeck.colour === "emerald"}
                 handleChange={handleChange}
               />
               <Swatch
-                colour="bg-teal-400"
-                borderColour="border-teal-100"
-                checked={newDeck.colour === "bg-teal-400"}
+                colour="teal"
+                checked={newDeck.colour === "teal"}
                 handleChange={handleChange}
               />
               <Swatch
-                colour="bg-cyan-400"
-                borderColour="border-cyan-100"
-                checked={newDeck.colour === "bg-cyan-400"}
+                colour="cyan"
+                checked={newDeck.colour === "cyan"}
                 handleChange={handleChange}
               />
               <Swatch
-                colour="bg-sky-400"
-                borderColour="border-sky-100"
-                checked={newDeck.colour === "bg-sky-400"}
+                colour="sky"
+                checked={newDeck.colour === "sky"}
                 handleChange={handleChange}
               />
               <Swatch
-                colour="bg-blue-400"
-                borderColour="border-blue-100"
-                checked={newDeck.colour === "bg-blue-400"}
+                colour="blue"
+                checked={newDeck.colour === "blue"}
                 handleChange={handleChange}
               />
               <Swatch
-                colour="bg-indigo-400"
-                borderColour="border-indigo-100"
-                checked={newDeck.colour === "bg-indigo-400"}
+                colour="indigo"
+                checked={newDeck.colour === "indigo"}
                 handleChange={handleChange}
               />
               <Swatch
-                colour="bg-violet-400"
-                borderColour="border-violet-100"
-                checked={newDeck.colour === "bg-violet-400"}
+                colour="violet"
+                checked={newDeck.colour === "violet"}
                 handleChange={handleChange}
               />
               <Swatch
-                colour="bg-purple-400"
-                borderColour="border-purple-100"
-                checked={newDeck.colour === "bg-purple-400"}
+                colour="purple"
+                checked={newDeck.colour === "purple"}
                 handleChange={handleChange}
               />
               <Swatch
-                colour="bg-fuchsia-400"
-                borderColour="border-fuchsia-100"
-                checked={newDeck.colour === "bg-fuchsia-400"}
+                colour="fuchsia"
+                checked={newDeck.colour === "fuchsia"}
                 handleChange={handleChange}
               />
               <Swatch
-                colour="bg-pink-400"
-                borderColour="border-pink-100"
-                checked={newDeck.colour === "bg-pink-400"}
+                colour="pink"
+                checked={newDeck.colour === "pink"}
                 handleChange={handleChange}
               />
               <Swatch
-                colour="bg-rose-400"
-                borderColour="border-rose-100"
-                checked={newDeck.colour === "bg-rose-400"}
+                colour="rose"
+                checked={newDeck.colour === "rose"}
                 handleChange={handleChange}
               />
             </div>
