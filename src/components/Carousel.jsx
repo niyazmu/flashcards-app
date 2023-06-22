@@ -39,11 +39,11 @@ function Carousel({ name, colour, cards }) {
         {hideResult ? (
           <>
             <div
-              className={`my-8 flex w-1/2 justify-between text-${colour}-600`}
+              className={`my-8 flex w-1/2 justify-between text-${colour}-600 font-medium`}
             >
               <span>{name}</span>
               <span>
-                {currentIndex + 1}/{numOfCards}
+                {currentIndex + 1} / {numOfCards}
               </span>
             </div>
             <div className="flex h-1/2 w-1/2 flex-col justify-center rounded-2xl bg-white p-16">
