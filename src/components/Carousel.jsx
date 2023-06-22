@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Carousel({ name, cards }) {
+function Carousel({ name, colour, cards }) {
   const [flipped, setFlipped] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
@@ -8,6 +8,7 @@ function Carousel({ name, cards }) {
 
   const numOfCards = cards.length;
   const shuffledCards = cards.sort(() => Math.random() - 0.5);
+  console.log(colour);
 
   function markCorrect() {
     setFlipped(false);
@@ -37,7 +38,9 @@ function Carousel({ name, cards }) {
       <div className="flex h-screen flex-col items-center justify-center">
         {hideResult ? (
           <>
-            <div className="my-8 flex w-1/2 justify-between text-fuchsia-600">
+            <div
+              className={`my-8 flex w-1/2 justify-between text-${colour}-600`}
+            >
               <span>{name}</span>
               <span>
                 {currentIndex + 1}/{numOfCards}
@@ -58,19 +61,19 @@ function Carousel({ name, cards }) {
             </div>
             <div className="my-8 flex">
               <button
-                className="mx-2 rounded-full bg-fuchsia-500 px-8 py-4 text-white"
+                className={`mx-2 rounded-full bg-${colour}-500 px-8 py-4 text-white`}
                 onClick={markIncorrect}
               >
                 Mark incorrect
               </button>
               <button
-                className="mx-2 rounded-full bg-fuchsia-500 px-8 py-4 text-white"
+                className={`mx-2 rounded-full bg-${colour}-500 px-8 py-4 text-white`}
                 onClick={() => setFlipped(!flipped)}
               >
                 Flip card
               </button>
               <button
-                className="mx-2 rounded-full bg-fuchsia-500 px-8 py-4 text-white"
+                className={`mx-2 rounded-full bg-${colour}-500 px-8 py-4 text-white`}
                 onClick={markCorrect}
               >
                 Mark correct
@@ -79,7 +82,7 @@ function Carousel({ name, cards }) {
           </>
         ) : (
           <>
-            <div className="text-8xl font-bold uppercase text-fuchsia-500">
+            <div className={`text-8xl font-bold uppercase text-${colour}-500`}>
               You scored {correctCount}/{numOfCards} <br />
               You scored {correctCount}/{numOfCards} <br />
               You scored {correctCount}/{numOfCards} <br />
@@ -87,7 +90,7 @@ function Carousel({ name, cards }) {
               You scored {correctCount}/{numOfCards}
             </div>
             <button
-              className="mx-2 my-8 rounded-full bg-fuchsia-500 px-8 py-4 text-white"
+              className={`mx-2 rounded-full bg-${colour}-500 my-8 px-8 py-4 text-white`}
               onClick={refresh}
             >
               Retry

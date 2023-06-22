@@ -11,10 +11,12 @@ function DeckPage() {
   const navigate = useNavigate();
 
   const [name, setName] = useState();
+  const [colour, setColour] = useState();
   const [cards, setCards] = useState([{}]);
 
   useEffect(() => {
     fetchName();
+    fetchColour();
     fetchCards();
   }, []);
 
@@ -34,6 +36,22 @@ function DeckPage() {
     }
   }
 
+  async function fetchColour() {
+    try {
+      const { data, error } = await supabase
+        .from("decks")
+        .select("colour")
+        .eq("deck_id", deck_id)
+        .limit(1);
+      if (error) throw error;
+      if (data != null) {
+        setColour(data[0].colour.replace("bg-", "").replace(/-\d{2,3}$/, "")); // explain this later
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
   async function fetchCards() {
     try {
       const { data, error } = await supabase
@@ -45,14 +63,14 @@ function DeckPage() {
         setCards(data);
       }
     } catch (error) {
-      navigate("/not-found");
+      alert(error.message);
     }
   }
 
   return (
     <>
-      <div className="h-screen w-screen bg-fuchsia-400">
-        <Carousel name={name} cards={cards} />
+      <div className={`h-screen w-screen bg-${colour}-400`}>
+        <Carousel name={name} colour={colour} cards={cards} />
       </div>
     </>
   );
