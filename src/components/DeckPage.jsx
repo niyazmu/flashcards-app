@@ -73,7 +73,7 @@ function DeckPage() {
     <>
       <div className={`flex h-screen flex-col bg-${colour}-400`}>
         <button
-          className={`p-8 bg-${colour}-500 text-white`}
+          className={`p-8 bg-${colour}-500 text-right text-white`}
           onClick={() => navigate("/")}
         >
           Go back to homepage
