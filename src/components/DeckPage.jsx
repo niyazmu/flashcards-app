@@ -67,9 +67,17 @@ function DeckPage() {
     }
   }
 
+  function goBack() {}
+
   return (
     <>
-      <div className={`h-screen w-screen bg-${colour}-400`}>
+      <div className={`flex h-screen flex-col bg-${colour}-400`}>
+        <button
+          className={`p-8 bg-${colour}-500 text-white`}
+          onClick={() => navigate("/")}
+        >
+          Go back to homepage
+        </button>
         <Carousel name={name} colour={colour} cards={cards} />
       </div>
     </>
