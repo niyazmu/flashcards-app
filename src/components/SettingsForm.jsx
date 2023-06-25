@@ -5,7 +5,7 @@ import supabase from "../supabaseClient.js";
 import Swatch from "./Swatch.jsx";
 import Table from "./Table.jsx";
 
-function SettingsForm({ modal }) {
+function SettingsForm({ modal, deck_id }) {
   const [deck, setDeck] = useState({
     deck_id: null,
     name: "",
@@ -16,6 +16,25 @@ function SettingsForm({ modal }) {
   ]);
   const [nameError, setNameError] = useState(false);
   const [cardError, setCardError] = useState(false);
+
+  useEffect(() => {
+    fetchDeck();
+  }, [modal]);
+
+  async function fetchDeck() {
+    try {
+      const { data, error } = await supabase
+        .from("decks")
+        .select("*")
+        .eq("deck_id", deck_id);
+      if (error) throw error;
+      if (data != null) {
+        setDeck(data[0]);
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  }
 
   function handleChange(event) {
     const { name, value } = event.target;

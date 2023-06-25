@@ -35,7 +35,7 @@ function Deck({ name, numberOfCards, colour, deck_id }) {
         isVisible={modal}
         close={() => setModal(false)}
       >
-        <SettingsForm modal={modal} />
+        <SettingsForm modal={modal} deck_id={deck_id} />
       </Modal>
     </>
   );
