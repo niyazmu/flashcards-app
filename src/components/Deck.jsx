@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 import Modal from "./Modal.jsx";
+import SettingsForm from "./SettingsForm.jsx";
 
 function Deck({ name, numberOfCards, colour, deck_id }) {
   const [modal, setModal] = useState(false);
@@ -34,7 +35,7 @@ function Deck({ name, numberOfCards, colour, deck_id }) {
         isVisible={modal}
         close={() => setModal(false)}
       >
-        Hello
+        <SettingsForm modal={modal} />
       </Modal>
     </>
   );
