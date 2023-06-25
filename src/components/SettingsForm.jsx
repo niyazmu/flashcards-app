@@ -77,6 +77,15 @@ function SettingsForm({ modal, deck_id }) {
     const isDeckNameEmpty = deck.name.trim() === "";
     handleErrors(isDeckNameEmpty, isAnyCardEmpty);
     if (!isDeckNameEmpty && !isAnyCardEmpty) {
+      try {
+        const { data, error } = await supabase
+          .from("decks")
+          .update(deck)
+          .eq("deck_id", deck_id);
+        if (error) throw error;
+      } catch (error) {
+        alert(error.message);
+      }
       window.location.reload();
     }
   }
