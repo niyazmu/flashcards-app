@@ -6,19 +6,14 @@ import Swatch from "./Swatch.jsx";
 import Table from "./Table.jsx";
 
 function SettingsForm({ modal, deck_id }) {
-  const [deck, setDeck] = useState({
-    deck_id: null,
-    name: "",
-    colour: "",
-  });
-  const [cards, setCards] = useState([
-    { front: "", back: "", deck_id: null, selected: false },
-  ]);
+  const [deck, setDeck] = useState({});
+  const [cards, setCards] = useState([]);
   const [nameError, setNameError] = useState(false);
   const [cardError, setCardError] = useState(false);
 
   useEffect(() => {
     fetchDeck();
+    fetchCards();
   }, [modal]);
 
   async function fetchDeck() {
@@ -30,6 +25,21 @@ function SettingsForm({ modal, deck_id }) {
       if (error) throw error;
       if (data != null) {
         setDeck(data[0]);
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
+  async function fetchCards() {
+    try {
+      const { data, error } = await supabase
+        .from("cards")
+        .select("*")
+        .eq("deck_id", deck_id);
+      if (error) throw error;
+      if (data != null) {
+        setCards(data);
       }
     } catch (error) {
       alert(error.message);
