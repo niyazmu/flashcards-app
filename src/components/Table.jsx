@@ -109,7 +109,7 @@ function Table({ cards, setCards, cardError, deck_id }) {
               </td>
               <td className="relative border text-left align-top">
                 <textarea
-                  className="box-border block h-full w-full resize-none border-blue-500 p-3 outline-0 focus:border-2"
+                  className="block h-full w-full resize-none p-3 outline-2 outline-blue-500"
                   type="text"
                   name="front"
                   rows="4"
@@ -119,7 +119,7 @@ function Table({ cards, setCards, cardError, deck_id }) {
               </td>
               <td className="relative border text-left align-top">
                 <textarea
-                  className="box-border block h-full w-full resize-none border-blue-500 p-3 outline-0 focus:border-2"
+                  className="block h-full w-full resize-none p-3 outline-2 outline-blue-500"
                   type="text"
                   name="back"
                   rows="4"
