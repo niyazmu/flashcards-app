@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 
 import { useState } from "react";
 
+import supabase from "../supabaseClient.js";
+
 import Modal from "./Modal.jsx";
 import SettingsForm from "./SettingsForm.jsx";
 
@@ -13,6 +15,29 @@ function Deck({ name, numberOfCards, colour, deck_id }) {
     setModal(true);
   }
 
+  async function handleDelete(event) {
+    event.preventDefault();
+    try {
+      const { data, error } = await supabase
+        .from("cards")
+        .delete()
+        .eq("deck_id", deck_id);
+      if (error) throw error;
+    } catch (error) {
+      alert(error.message);
+    }
+    try {
+      const { data, error } = await supabase
+        .from("decks")
+        .delete()
+        .eq("deck_id", deck_id);
+      if (error) throw error;
+    } catch (error) {
+      alert(error.message);
+    }
+    window.location.reload();
+  }
+
   return (
     <>
       <Link to={`/${deck_id}`} key={deck_id.toString()}>
@@ -22,6 +47,12 @@ function Deck({ name, numberOfCards, colour, deck_id }) {
             <div className="text-white">{numberOfCards} cards</div>
             <button
               className="text-underline ml-auto text-white"
+              onClick={handleDelete}
+            >
+              Delete
+            </button>
+            <button
+              className="text-underline ml-2 text-white"
               onClick={handleEdit}
             >
               Edit
