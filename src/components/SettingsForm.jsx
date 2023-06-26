@@ -10,6 +10,7 @@ function SettingsForm({ modal, deck_id }) {
   const [cards, setCards] = useState([]);
   const [nameError, setNameError] = useState(false);
   const [cardError, setCardError] = useState(false);
+  const [deletedCardsIds, setDeletedCardsIds] = useState([]);
 
   useEffect(() => {
     fetchDeck();
@@ -82,6 +83,15 @@ function SettingsForm({ modal, deck_id }) {
           .from("decks")
           .update(deck)
           .eq("deck_id", deck_id);
+        if (error) throw error;
+      } catch (error) {
+        alert(error.message);
+      }
+      try {
+        const { data, error } = await supabase
+          .from("cards")
+          .delete()
+          .in("card_id", deletedCardsIds);
         if (error) throw error;
       } catch (error) {
         alert(error.message);
@@ -213,6 +223,7 @@ function SettingsForm({ modal, deck_id }) {
         setCards={setCards}
         cardError={cardError}
         deck_id={deck.deck_id}
+        setDeletedCardsIds={setDeletedCardsIds}
       />
       <button className="mt-8 w-full rounded bg-blue-500 p-4 text-white">
         Save changes

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Table({ cards, setCards, cardError, deck_id }) {
+function Table({ cards, setCards, cardError, deck_id, setDeletedCardsIds }) {
   const [selectAll, setSelectAll] = useState(false);
 
   function addCard(event) {
@@ -18,6 +18,17 @@ function Table({ cards, setCards, cardError, deck_id }) {
     event.preventDefault();
     const updatedCards = cards.filter((card) => !card.selected);
     setCards(updatedCards);
+
+    if (typeof setDeletedCardsIds === "function") {
+      const deletedCardId = cards
+        .filter((card) => card.selected && card.card_id !== undefined)
+        .map((card) => card.card_id);
+      setDeletedCardsIds((prevDeletedCardsIds) => [
+        ...prevDeletedCardsIds,
+        ...deletedCardId,
+      ]);
+    }
+
     if (updatedCards.length === 0) {
       setSelectAll(false);
     }
