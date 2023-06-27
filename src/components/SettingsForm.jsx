@@ -96,6 +96,16 @@ function SettingsForm({ modal, deck_id }) {
       } catch (error) {
         alert(error.message);
       }
+      for (const card of cards) {
+        try {
+          const { data, error } = await supabase
+            .from("cards")
+            .upsert([card], { onConflict: ["card_id"] });
+          if (error) throw error;
+        } catch (error) {
+          alert(error.message);
+        }
+      }
       window.location.reload();
     }
   }
