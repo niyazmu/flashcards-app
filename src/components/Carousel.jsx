@@ -39,7 +39,7 @@ function Carousel({ name, colour, cards }) {
         {hideResult ? (
           <>
             <div
-              className={`my-8 flex w-1/2 justify-between text-${colour}-600 font-medium`}
+              className={`font-regular my-8 flex w-1/2 justify-between text-white`}
             >
               <span>{name}</span>
               <span>
@@ -61,19 +61,19 @@ function Carousel({ name, colour, cards }) {
             </div>
             <div className="my-8 flex">
               <button
-                className={`mx-2 rounded-full bg-${colour}-500 px-8 py-4 text-white`}
+                className={`mx-2 rounded-full bg-${colour}-500 px-8 py-4 font-medium text-white`}
                 onClick={markIncorrect}
               >
                 Mark incorrect
               </button>
               <button
-                className={`mx-2 rounded-full bg-${colour}-500 px-8 py-4 text-white`}
+                className={`mx-2 rounded-full bg-${colour}-500 px-8 py-4 font-medium text-white`}
                 onClick={() => setFlipped(!flipped)}
               >
                 Flip card
               </button>
               <button
-                className={`mx-2 rounded-full bg-${colour}-500 px-8 py-4 text-white`}
+                className={`mx-2 rounded-full bg-${colour}-500 px-8 py-4 font-medium text-white`}
                 onClick={markCorrect}
               >
                 Mark correct
@@ -89,7 +89,7 @@ function Carousel({ name, colour, cards }) {
               </span>
             </div>
             <button
-              className={`mx-2 rounded-full bg-${colour}-500 my-8 px-8 py-4 text-white`}
+              className={`mx-2 rounded-full bg-${colour}-500 my-8 px-8 py-4 font-medium text-white`}
               onClick={refresh}
             >
               Retry
