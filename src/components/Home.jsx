@@ -38,10 +38,23 @@ function Home() {
     }
   }
 
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredDecks, setFilteredDecks] = useState([]);
+
   function countCards(deck_id) {
     const filteredCards = cards.filter((card) => card.deck_id === deck_id);
     const numberOfCards = filteredCards.length;
     return numberOfCards;
+  }
+
+  function handleSearch(event) {
+    const query = event.target.value;
+    setSearchQuery(query);
+
+    const filtered = decks.filter((deck) =>
+      deck.name.toLowerCase().startsWith(query.toLowerCase())
+    );
+    setFilteredDecks(filtered);
   }
 
   return (
@@ -50,17 +63,26 @@ function Home() {
         <Header decks={decks} />
         <>
           <main>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={handleSearch}
+              placeholder="Search decks..."
+            />
+
             <div className="grid grid-cols-4 gap-8">
-              {decks.map((deck) => (
-                <div key={deck.deck_id}>
-                  <Deck
-                    name={deck.name}
-                    numberOfCards={countCards(deck.deck_id)}
-                    colour={deck.colour}
-                    deck_id={deck.deck_id}
-                  />
-                </div>
-              ))}
+              {(filteredDecks.length === 0 ? decks : filteredDecks).map(
+                (deck) => (
+                  <div key={deck.deck_id}>
+                    <Deck
+                      name={deck.name}
+                      numberOfCards={countCards(deck.deck_id)}
+                      colour={deck.colour}
+                      deck_id={deck.deck_id}
+                    />
+                  </div>
+                )
+              )}
             </div>
           </main>
         </>
