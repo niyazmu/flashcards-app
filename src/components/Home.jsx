@@ -86,18 +86,16 @@ function Home() {
         </Modal>
         <main>
           <div className="grid grid-cols-4 gap-8">
-            {(filteredDecks.length === 0 ? decks : filteredDecks).map(
-              (deck) => (
-                <div key={deck.deck_id}>
-                  <Deck
-                    name={deck.name}
-                    numberOfCards={countCards(deck.deck_id)}
-                    colour={deck.colour}
-                    deck_id={deck.deck_id}
-                  />
-                </div>
-              )
-            )}
+            {(searchQuery === "" ? decks : filteredDecks).map((deck) => (
+              <div key={deck.deck_id}>
+                <Deck
+                  name={deck.name}
+                  numberOfCards={countCards(deck.deck_id)}
+                  colour={deck.colour}
+                  deck_id={deck.deck_id}
+                />
+              </div>
+            ))}
           </div>
         </main>
       </div>
