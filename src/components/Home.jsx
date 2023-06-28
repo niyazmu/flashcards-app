@@ -65,9 +65,10 @@ function Home() {
       <div className="container mx-auto">
         <header className="my-8 flex items-center gap-4">
           <input
-            className="flex-grow rounded-full border p-5 pl-8 outline-blue-500"
             type="text"
-            maxLength="32"
+            value={searchQuery}
+            onChange={handleSearch}
+            placeholder="Search decks..."
           />
           <button
             className="ml-auto rounded-full bg-blue-500 px-12 py-5 text-white"
@@ -84,13 +85,6 @@ function Home() {
           <CreateForm modal={modal} decks={decks} />
         </Modal>
         <main>
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={handleSearch}
-            placeholder="Search decks..."
-          />
-
           <div className="grid grid-cols-4 gap-8">
             {(filteredDecks.length === 0 ? decks : filteredDecks).map(
               (deck) => (
