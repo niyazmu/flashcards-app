@@ -2,8 +2,9 @@ import supabase from "../supabaseClient";
 
 import { useState, useEffect } from "react";
 
-import Header from "./Header.jsx";
 import Deck from "./Deck.jsx";
+import Modal from "./Modal.jsx";
+import CreateForm from "./CreateForm.jsx";
 
 function Home() {
   const [decks, setDecks] = useState([]);
@@ -57,35 +58,54 @@ function Home() {
     setFilteredDecks(filtered);
   }
 
+  const [modal, setModal] = useState(false);
+
   return (
     <>
       <div className="container mx-auto">
-        <Header decks={decks} />
-        <>
-          <main>
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={handleSearch}
-              placeholder="Search decks..."
-            />
+        <header className="my-8 flex items-center gap-4">
+          <input
+            className="flex-grow rounded-full border p-5 pl-8 outline-blue-500"
+            type="text"
+            maxLength="32"
+          />
+          <button
+            className="ml-auto rounded-full bg-blue-500 px-12 py-5 text-white"
+            onClick={() => setModal(true)}
+          >
+            Create flashcards
+          </button>
+        </header>
+        <Modal
+          heading="Create flashcards"
+          isVisible={modal}
+          close={() => setModal(false)}
+        >
+          <CreateForm modal={modal} decks={decks} />
+        </Modal>
+        <main>
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={handleSearch}
+            placeholder="Search decks..."
+          />
 
-            <div className="grid grid-cols-4 gap-8">
-              {(filteredDecks.length === 0 ? decks : filteredDecks).map(
-                (deck) => (
-                  <div key={deck.deck_id}>
-                    <Deck
-                      name={deck.name}
-                      numberOfCards={countCards(deck.deck_id)}
-                      colour={deck.colour}
-                      deck_id={deck.deck_id}
-                    />
-                  </div>
-                )
-              )}
-            </div>
-          </main>
-        </>
+          <div className="grid grid-cols-4 gap-8">
+            {(filteredDecks.length === 0 ? decks : filteredDecks).map(
+              (deck) => (
+                <div key={deck.deck_id}>
+                  <Deck
+                    name={deck.name}
+                    numberOfCards={countCards(deck.deck_id)}
+                    colour={deck.colour}
+                    deck_id={deck.deck_id}
+                  />
+                </div>
+              )
+            )}
+          </div>
+        </main>
       </div>
     </>
   );
