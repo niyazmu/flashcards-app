@@ -63,20 +63,6 @@ function Home() {
   return (
     <>
       <div className="container mx-auto">
-        <header className="my-8 flex items-center gap-4">
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={handleSearch}
-            placeholder="Search decks..."
-          />
-          <button
-            className="ml-auto rounded-full bg-blue-500 px-12 py-5 text-white"
-            onClick={() => setModal(true)}
-          >
-            Create flashcards
-          </button>
-        </header>
         <Modal
           heading="Create flashcards"
           isVisible={modal}
@@ -84,6 +70,55 @@ function Home() {
         >
           <CreateForm modal={modal} decks={decks} />
         </Modal>
+        <header>
+          <div className="mt-12 flex justify-end">
+            <button onClick={() => setModal(true)} className="flex h-16 w-16 items-center justify-center rounded-full bg-black text-white">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="h-6 w-6"
+              >
+                <path
+                  d="M12 4.5v15m7.5-7.5h-15"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+          <div className="mb-16 mt-12">
+            <div
+              className={`${
+                searchQuery !== "" ? "text-black" : "text-gray-200"
+              }`}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="h-12 w-12"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                />
+              </svg>
+            </div>
+            <input
+              className="mt-2 w-full text-7xl placeholder-gray-200 outline-none"
+              type="text"
+              value={searchQuery}
+              onChange={handleSearch}
+              placeholder="Search flashcards..."
+            />
+          </div>
+        </header>
+
         <main>
           <div className="grid grid-cols-4 gap-8">
             {(searchQuery === "" ? decks : filteredDecks).map((deck) => (
