@@ -2,13 +2,16 @@ import supabase from "../supabaseClient";
 
 import { useState, useEffect } from "react";
 
-import Deck from "./Deck.jsx";
 import Modal from "./Modal.jsx";
 import CreateForm from "./CreateForm.jsx";
+import Deck from "./Deck.jsx";
 
 function Home() {
   const [decks, setDecks] = useState([]);
   const [cards, setCards] = useState([]);
+  const [modal, setModal] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredDecks, setFilteredDecks] = useState([]);
 
   useEffect(() => {
     fetchDecks();
@@ -39,8 +42,14 @@ function Home() {
     }
   }
 
-  const [searchQuery, setSearchQuery] = useState("");
-  const [filteredDecks, setFilteredDecks] = useState([]);
+  function handleSearch(event) {
+    const query = event.target.value;
+    setSearchQuery(query);
+    const filtered = decks.filter((deck) =>
+      deck.name.toLowerCase().startsWith(query.toLowerCase())
+    );
+    setFilteredDecks(filtered);
+  }
 
   function countCards(deck_id) {
     const filteredCards = cards.filter((card) => card.deck_id === deck_id);
@@ -48,31 +57,15 @@ function Home() {
     return numberOfCards;
   }
 
-  function handleSearch(event) {
-    const query = event.target.value;
-    setSearchQuery(query);
-
-    const filtered = decks.filter((deck) =>
-      deck.name.toLowerCase().startsWith(query.toLowerCase())
-    );
-    setFilteredDecks(filtered);
-  }
-
-  const [modal, setModal] = useState(false);
-
   return (
     <>
       <div className="container mx-auto">
-        <Modal
-          heading="Create flashcards"
-          isVisible={modal}
-          close={() => setModal(false)}
-        >
-          <CreateForm modal={modal} decks={decks} />
-        </Modal>
         <header>
           <div className="mt-12 flex justify-end">
-            <button onClick={() => setModal(true)} className="flex h-16 w-16 items-center justify-center rounded-full bg-black text-white">
+            <button
+              onClick={() => setModal(true)}
+              className="flex h-16 w-16 items-center justify-center rounded-full bg-black text-white"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -118,7 +111,6 @@ function Home() {
             />
           </div>
         </header>
-
         <main>
           <div className="grid grid-cols-4 gap-8">
             {(searchQuery === "" ? decks : filteredDecks).map((deck) => (
@@ -134,6 +126,13 @@ function Home() {
           </div>
         </main>
       </div>
+      <Modal
+        heading="Create flashcards"
+        isVisible={modal}
+        close={() => setModal(false)}
+      >
+        <CreateForm modal={modal} decks={decks} />
+      </Modal>
     </>
   );
 }
