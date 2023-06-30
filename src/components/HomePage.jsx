@@ -6,7 +6,7 @@ import Modal from "./Modal.jsx";
 import CreateForm from "./CreateForm.jsx";
 import Deck from "./Deck.jsx";
 
-function Home() {
+function HomePage() {
   const [decks, setDecks] = useState([]);
   const [cards, setCards] = useState([]);
   const [modal, setModal] = useState(false);
@@ -137,4 +137,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomePage;
