@@ -61,7 +61,7 @@ function HomePage() {
     <>
       <div className="container mx-auto">
         <header>
-          <div className="mt-12 flex justify-end">
+          <div className="my-16 flex justify-end">
             <button
               onClick={() => setModal(true)}
               className="flex h-16 w-16 items-center justify-center rounded-full bg-black text-white"
@@ -81,7 +81,7 @@ function HomePage() {
               </svg>
             </button>
           </div>
-          <div className="mb-16 mt-12">
+          <div className="mb-16">
             <div
               className={`${
                 searchQuery !== "" ? "text-black" : "text-gray-200"
