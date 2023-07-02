@@ -121,7 +121,7 @@ function SettingsForm({ modal, deck_id }) {
             className={`w-full rounded border p-3 ${
               nameError
                 ? "border-red-500 focus:outline-red-500"
-                : "border focus:outline-blue-500 "
+                : "border focus:outline-black "
             }`}
             type="text"
             name="name"
@@ -235,9 +235,17 @@ function SettingsForm({ modal, deck_id }) {
         deck_id={deck.deck_id}
         setDeletedCardsIds={setDeletedCardsIds}
       />
-      <button className="mt-8 w-full rounded bg-blue-500 p-4 text-white">
-        Save changes
-      </button>
+      <div className="mb-16 mt-8 flex flex-col gap-2 sm:flex-row">
+        <button
+          className="w-1/2 rounded-md border border-black p-4"
+          onClick={() => setModal(false)}
+        >
+          Cancel
+        </button>
+        <button className="mt-2 w-1/2 rounded-md bg-black p-4 text-white sm:ml-2 sm:mt-0">
+          Save
+        </button>
+      </div>
     </form>
   );
 }

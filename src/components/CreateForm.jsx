@@ -86,16 +86,16 @@ function CreateForm({ modal, decks }) {
 
   return (
     <form onSubmit={(event) => handleSubmit(event)}>
-      <div className="my-8 flex space-x-8">
+      <div className="space-between my-8 flex gap-8">
         <div className="w-1/2">
-          <label className="mb-2 block font-medium" htmlFor="name">
+          <label className="mb-4 block font-medium" htmlFor="name">
             Name
           </label>
           <input
             className={`w-full rounded border p-3 ${
               nameError
                 ? "border-red-500 focus:outline-red-500"
-                : "border focus:outline-blue-500 "
+                : "border focus:outline-black "
             }`}
             type="text"
             name="name"
@@ -111,7 +111,7 @@ function CreateForm({ modal, decks }) {
         </div>
         <div className="w-1/2">
           <fieldset>
-            <legend className="mb-2 block font-medium">Colours</legend>
+            <legend className="mb-4 block font-medium">Colours</legend>
             <div className="flex flex-wrap gap-2">
               <Swatch
                 colour="red"
@@ -208,9 +208,17 @@ function CreateForm({ modal, decks }) {
         cardError={cardError}
         deck_id={newDeck.deck_id}
       />
-      <button className="mt-8 w-full rounded bg-blue-500 p-4 text-white">
-        Create flashcards
-      </button>
+      <div className="mb-16 mt-8 flex flex-col gap-2 sm:flex-row">
+        <button
+          className="w-1/2 rounded-md border border-black p-4"
+          onClick={() => setModal(false)}
+        >
+          Cancel
+        </button>
+        <button className="mt-2 w-1/2 rounded-md bg-black p-4 text-white sm:ml-2 sm:mt-0">
+          Create
+        </button>
+      </div>
     </form>
   );
 }
