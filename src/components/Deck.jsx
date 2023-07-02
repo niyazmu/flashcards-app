@@ -91,7 +91,7 @@ function Deck({ name, numberOfCards, colour, deck_id }) {
       </Link>
 
       <Modal
-        heading={`${name} settings`}
+        heading={`EDIT: ${name}`}
         isVisible={modal}
         close={() => setModal(false)}
       >
