@@ -77,15 +77,43 @@ function Table({ cards, setCards, cardError, deck_id, setDeletedCardsIds }) {
         <h2 className="text-left text-xl font-medium">Cards</h2>
         <div className="flex w-1/4 justify-end space-x-2">
           <button
-            className="rounded bg-red-500 px-4 py-1 text-white"
+            className="flex items-center rounded-md border-2 border-red-500 px-4 py-1 font-medium text-red-500"
             onClick={(event) => deleteCards(event)}
           >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="mr-2 h-6 w-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 9.75L14.25 12m0 0l2.25 2.25M14.25 12l2.25-2.25M14.25 12L12 14.25m-2.58 4.92l-6.375-6.375a1.125 1.125 0 010-1.59L9.42 4.83c.211-.211.498-.33.796-.33H19.5a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25 2.25h-9.284c-.298 0-.585-.119-.796-.33z"
+              />
+            </svg>
             Delete
           </button>
           <button
-            className="rounded bg-blue-500 px-4 py-1 text-white"
+            className="flex items-center rounded-md bg-black px-4 py-1 font-medium text-white"
             onClick={(event) => addCard(event)}
           >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="mr-2 h-6 w-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
             Add
           </button>
         </div>
@@ -120,7 +148,7 @@ function Table({ cards, setCards, cardError, deck_id, setDeletedCardsIds }) {
               </td>
               <td className="relative border text-left align-top">
                 <textarea
-                  className="block h-full w-full resize-none p-3 outline-2 outline-blue-500"
+                  className="block h-full w-full resize-none p-3 outline-2 outline-black"
                   type="text"
                   name="front"
                   rows="4"
@@ -130,7 +158,7 @@ function Table({ cards, setCards, cardError, deck_id, setDeletedCardsIds }) {
               </td>
               <td className="relative border text-left align-top">
                 <textarea
-                  className="block h-full w-full resize-none p-3 outline-2 outline-blue-500"
+                  className="block h-full w-full resize-none p-3 outline-2 outline-black"
                   type="text"
                   name="back"
                   rows="4"
