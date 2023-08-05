@@ -13,12 +13,49 @@ function DeckPage({ windowWidth }) {
   const [name, setName] = useState();
   const [colour, setColour] = useState();
   const [cards, setCards] = useState([{}]);
+  const [flipped, setFlipped] = useState(false);
+  const [index, setIndex] = useState(0);
+  const [count, setCount] = useState(0);
+  const [hideResult, setHideResult] = useState(true);
+
+  const numOfCards = cards.length;
 
   useEffect(() => {
     fetchName();
     fetchColour();
     fetchCards();
   }, []);
+
+  function flip() {
+    setFlipped(!flipped);
+  }
+
+  function correct() {
+    setFlipped(false);
+    setCount((prevCount) => prevCount + 1);
+    setIndex((prevIndex) => {
+      const newIndex = prevIndex + 1;
+      if (newIndex < numOfCards) {
+        return newIndex;
+      } else {
+        setHideResult(false);
+        return prevIndex;
+      }
+    });
+  }
+
+  function incorrect() {
+    setFlipped(false);
+    setIndex((prevIndex) => {
+      const newIndex = prevIndex + 1;
+      if (newIndex < numOfCards) {
+        return newIndex;
+      } else {
+        setHideResult(false);
+        return prevIndex;
+      }
+    });
+  }
 
   async function fetchName() {
     try {
@@ -67,39 +104,14 @@ function DeckPage({ windowWidth }) {
     }
   }
 
-  const [flipped, setFlipped] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [correctCount, setCorrectCount] = useState(0);
-  const [hideResult, setHideResult] = useState(true);
-
-  const numOfCards = cards.length;
-  const shuffledCards = cards.sort(() => Math.random() - 0.5);
-
-  function markCorrect() {
-    setFlipped(false);
-    setCorrectCount((prevCorrectCount) => prevCorrectCount + 1);
-    const newIndex = currentIndex + 1;
-    if (newIndex === numOfCards) {
-      setHideResult(false);
-    }
-    setCurrentIndex(newIndex);
-  }
-
-  function markIncorrect() {
-    setFlipped(false);
-    const newIndex = currentIndex + 1;
-    if (newIndex === numOfCards) {
-      setHideResult(false);
-    }
-    setCurrentIndex(newIndex);
-  }
-
   function refresh() {
     window.location.reload();
   }
 
   return (
     <>
+      {console.log(cards[index].back)}
+
       {windowWidth >= 1024 ? (
         <>
           <div className={`flex h-screen flex-col bg-${colour}-500 px-8`}>
@@ -109,7 +121,7 @@ function DeckPage({ windowWidth }) {
                   {hideResult && (
                     <div className="mr-4 flex flex-col items-start">
                       <span className="hidden italic">
-                        {currentIndex + 1} / {numOfCards}
+                        {index} / {numOfCards}
                       </span>
                       <div className="text-xl font-semibold">{name}</div>
                     </div>
@@ -143,21 +155,15 @@ function DeckPage({ windowWidth }) {
                   <div className="container mx-auto flex flex-col items-center justify-center">
                     <div className="xl:h-[26rem] xl:w-[54rem] flex items-center justify-center rounded-3xl bg-white p-8 lg:h-[24rem] lg:w-[50rem] 2xl:h-[28rem] 2xl:w-[60rem]">
                       {flipped ? (
-                        <>
-                          <div className="text-4xl">
-                            {shuffledCards[currentIndex].back}
-                          </div>
-                        </>
+                        <div className="text-4xl">{cards[index].back}</div>
                       ) : (
-                        <div className="text-4xl">
-                          {shuffledCards[currentIndex].front}
-                        </div>
+                        <div className="text-4xl">{cards[index].front}</div>
                       )}
                     </div>
                     <div className="mb-16 mt-8 flex gap-4">
                       <button
                         className="flex rounded-full bg-black px-8 py-4 text-white"
-                        onClick={markIncorrect}
+                        onClick={incorrect}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -177,7 +183,7 @@ function DeckPage({ windowWidth }) {
                       </button>
                       <button
                         className="flex rounded-full bg-black px-8 py-4 text-white"
-                        onClick={() => setFlipped(!flipped)}
+                        onClick={flip}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -197,7 +203,7 @@ function DeckPage({ windowWidth }) {
                       </button>
                       <button
                         className="flex rounded-full bg-black px-8 py-4 text-white"
-                        onClick={markCorrect}
+                        onClick={correct}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -222,16 +228,13 @@ function DeckPage({ windowWidth }) {
                 <>
                   <div className="container mx-auto flex flex-col items-center justify-center">
                     <div className="mb-48 mt-16 flex flex-col items-center">
-                      <h1
-                        className="mb-8 text-left
-                  "
-                      >
+                      <h1 className="mb-8 text-left">
                         <span className="text-2xl font-medium lg:text-4xl">
                           You scored
                         </span>
                         <br />
                         <span className="text-5xl font-medium lg:text-8xl">
-                          {correctCount} out of {numOfCards}
+                          {count} out of {numOfCards}
                         </span>
                       </h1>
                       <button
@@ -252,7 +255,7 @@ function DeckPage({ windowWidth }) {
                             d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
                           />
                         </svg>
-                        <span className="hidden lg:inline">Retry</span>
+                        <span>Retry</span>
                       </button>
                     </div>
                   </div>
