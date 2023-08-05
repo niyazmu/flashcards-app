@@ -235,16 +235,14 @@ function SettingsForm({ modal, deck_id }) {
         deck_id={deck.deck_id}
         setDeletedCardsIds={setDeletedCardsIds}
       />
-      <div className="mb-16 mt-8 flex flex-col gap-2 sm:flex-row">
+      <div className="mt-8 grid grid-cols-2 gap-4">
         <button
-          className="w-1/2 rounded-md border border-black p-4"
+          className="rounded-md border border-black p-4"
           onClick={() => setModal(false)}
         >
           Cancel
         </button>
-        <button className="mt-2 w-1/2 rounded-md bg-black p-4 text-white sm:ml-2 sm:mt-0">
-          Save
-        </button>
+        <button className="rounded-md bg-black p-4 text-white">Save</button>
       </div>
     </form>
   );

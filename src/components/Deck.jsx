@@ -42,11 +42,15 @@ function Deck({ name, numberOfCards, colour, deck_id }) {
     <>
       <Link to={`/${deck_id}`} key={deck_id.toString()}>
         <div
-          className={`bg-${colour}-400 flex h-48 flex-col justify-between rounded-2xl p-8`}
+          className={`bg-${colour}-400 flex flex-col justify-between rounded-2xl lg:h-56 lg:p-8 xl:h-72 xl:p-10 2xl:h-56 2xl:p-8`}
         >
-          <h1 className="text-xl font-semibold">{name}</h1>
+          <h1 className="font-semibold lg:text-xl xl:text-2xl 2xl:text-xl">
+            {name}
+          </h1>
           <div className="flex items-center justify-between">
-            <div className="italic">{numberOfCards} cards</div>
+            <div className="italic lg:text-base xl:text-xl 2xl:text-base">
+              {numberOfCards} cards
+            </div>
             <div>
               <button onClick={handleDelete}>
                 <svg
@@ -55,7 +59,7 @@ function Deck({ name, numberOfCards, colour, deck_id }) {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="black"
-                  className="h-6 w-6"
+                  className="h-6 w-6 lg:h-6 lg:w-6 xl:h-8 xl:w-8 2xl:h-6 2xl:w-6"
                 >
                   <path
                     strokeLinecap="round"
@@ -64,14 +68,14 @@ function Deck({ name, numberOfCards, colour, deck_id }) {
                   />
                 </svg>
               </button>
-              <button className="ml-4" onClick={handleEdit}>
+              <button className="ml-2" onClick={handleEdit}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="black"
-                  className="h-6 w-6"
+                  className="h-6 w-6 lg:h-6 lg:w-6 xl:h-8 xl:w-8 2xl:h-6 2xl:w-6"
                 >
                   <path
                     strokeLinecap="round"

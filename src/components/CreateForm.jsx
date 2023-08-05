@@ -86,8 +86,8 @@ function CreateForm({ modal, decks }) {
 
   return (
     <form onSubmit={(event) => handleSubmit(event)}>
-      <div className="space-between my-8 flex gap-8">
-        <div className="w-1/2">
+      <div className="mb-8 grid grid-cols-1 gap-8 lg:grid-cols-2">
+        <div>
           <label className="mb-4 block font-medium" htmlFor="name">
             Name
           </label>
@@ -109,7 +109,7 @@ function CreateForm({ modal, decks }) {
             </span>
           )}
         </div>
-        <div className="w-1/2">
+        <div>
           <fieldset>
             <legend className="mb-4 block font-medium">Colours</legend>
             <div className="flex flex-wrap gap-2">
@@ -208,16 +208,14 @@ function CreateForm({ modal, decks }) {
         cardError={cardError}
         deck_id={newDeck.deck_id}
       />
-      <div className="mb-16 mt-8 flex flex-col gap-2 sm:flex-row">
+      <div className="mt-8 grid grid-cols-2 gap-4">
         <button
-          className="w-1/2 rounded-md border border-black p-4"
+          className="rounded-md border border-black p-4"
           onClick={() => setModal(false)}
         >
           Cancel
         </button>
-        <button className="mt-2 w-1/2 rounded-md bg-black p-4 text-white sm:ml-2 sm:mt-0">
-          Create
-        </button>
+        <button className="rounded-md bg-black p-4 text-white">Create</button>
       </div>
     </form>
   );

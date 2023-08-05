@@ -146,7 +146,7 @@ function Table({ cards, setCards, cardError, deck_id, setDeletedCardsIds }) {
                   onChange={() => handleSelect(index)}
                 />
               </td>
-              <td className="relative border text-left align-top">
+              <td className="relative h-40 border text-left align-top">
                 <textarea
                   className="block h-full w-full resize-none p-3 outline-2 outline-black"
                   type="text"
@@ -156,7 +156,7 @@ function Table({ cards, setCards, cardError, deck_id, setDeletedCardsIds }) {
                   onChange={(event) => handleTextarea(event, index)}
                 />
               </td>
-              <td className="relative border text-left align-top">
+              <td className="relative h-40 border text-left align-top">
                 <textarea
                   className="block h-full w-full resize-none p-3 outline-2 outline-black"
                   type="text"

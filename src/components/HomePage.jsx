@@ -5,8 +5,9 @@ import { useState, useEffect } from "react";
 import Modal from "./Modal.jsx";
 import CreateForm from "./CreateForm.jsx";
 import Deck from "./Deck.jsx";
+import NotSupportedPage from "./NotSupportedPage.jsx";
 
-function HomePage() {
+function HomePage({ windowWidth }) {
   const [decks, setDecks] = useState([]);
   const [cards, setCards] = useState([]);
   const [modal, setModal] = useState(false);
@@ -59,79 +60,86 @@ function HomePage() {
 
   return (
     <>
-      <div className="container mx-auto">
-        <header>
-          <div className="my-16 flex justify-end">
-            <button
-              onClick={() => setModal(true)}
-              className="flex h-16 w-16 items-center justify-center rounded-full bg-black text-white"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="h-6 w-6"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </button>
-          </div>
-          <div className="mb-16">
-            <div
-              className={`${
-                searchQuery !== "" ? "text-black" : "text-gray-200"
-              }`}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="h-12 w-12"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                />
-              </svg>
-            </div>
-            <input
-              className="mt-2 w-full text-7xl placeholder-gray-200 outline-none"
-              type="text"
-              value={searchQuery}
-              onChange={handleSearch}
-              placeholder="Search flashcards..."
-            />
-          </div>
-        </header>
-        <main>
-          <div className="grid grid-cols-4 gap-8">
-            {(searchQuery === "" ? decks : filteredDecks).map((deck) => (
-              <div key={deck.deck_id}>
-                <Deck
-                  name={deck.name}
-                  numberOfCards={countCards(deck.deck_id)}
-                  colour={deck.colour}
-                  deck_id={deck.deck_id}
+      {windowWidth >= 1024 ? (
+        <>
+          {/* It's set to hidden so when the modal is active the user cannot see the decks too. */}
+          <div className={`container mx-auto px-8 ${modal ? "hidden" : ""}`}>
+            <header>
+              <div className="my-8 flex justify-end lg:my-16">
+                <button
+                  onClick={() => setModal(true)}
+                  className="flex h-16 w-16 items-center justify-center rounded-full bg-black text-white"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="h-6 w-6"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div className="mb-16">
+                <div
+                  className={`${
+                    searchQuery !== "" ? "text-black" : "text-gray-200"
+                  }`}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="h-8 w-8 md:h-10 md:w-10 xl:h-12 xl:w-12 2xl:h-12 2xl:w-12"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                    />
+                  </svg>
+                </div>
+                <input
+                  className="mt-2 w-full text-4xl placeholder-gray-200 outline-none lg:text-6xl xl:text-6xl 2xl:text-7xl"
+                  type="text"
+                  value={searchQuery}
+                  onChange={handleSearch}
+                  placeholder="Search flashcards..."
                 />
               </div>
-            ))}
+            </header>
+            <main>
+              <div className="mb-16 grid gap-8 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
+                {(searchQuery === "" ? decks : filteredDecks).map((deck) => (
+                  <div key={deck.deck_id}>
+                    <Deck
+                      name={deck.name}
+                      numberOfCards={countCards(deck.deck_id)}
+                      colour={deck.colour}
+                      deck_id={deck.deck_id}
+                    />
+                  </div>
+                ))}
+              </div>
+            </main>
           </div>
-        </main>
-      </div>
-      <Modal
-        heading="Create a new deck"
-        isVisible={modal}
-        close={() => setModal(false)}
-      >
-        <CreateForm modal={modal} setModal={setModal} decks={decks} />
-      </Modal>
+          <Modal
+            heading="Create a new deck"
+            isVisible={modal}
+            close={() => setModal(false)}
+          >
+            <CreateForm modal={modal} setModal={setModal} decks={decks} />
+          </Modal>
+        </>
+      ) : (
+        <NotSupportedPage />
+      )}
     </>
   );
 }
