@@ -10,8 +10,7 @@ function DeckPage({ windowWidth }) {
   const { deck_id } = useParams();
   const navigate = useNavigate();
 
-  const [name, setName] = useState();
-  const [colour, setColour] = useState();
+  const [deck, setDeck] = useState({});
   const [cards, setCards] = useState([{}]);
   const [flipped, setFlipped] = useState(false);
   const [index, setIndex] = useState(0);
@@ -21,10 +20,40 @@ function DeckPage({ windowWidth }) {
   const numOfCards = cards.length;
 
   useEffect(() => {
-    fetchName();
-    fetchColour();
+    fetchDeck();
     fetchCards();
   }, []);
+
+  async function fetchDeck() {
+    try {
+      const { data, error } = await supabase
+        .from("decks")
+        .select("*")
+        .eq("deck_id", deck_id)
+        .limit(1);
+      if (error) throw error;
+      if (data != null) {
+        setDeck(data[0]);
+      }
+    } catch (error) {
+      navigate("/not-found");
+    }
+  }
+
+  async function fetchCards() {
+    try {
+      const { data, error } = await supabase
+        .from("cards")
+        .select("*")
+        .eq("deck_id", deck_id);
+      if (error) throw error;
+      if (data != null) {
+        setCards(data);
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  }
 
   function flip() {
     setFlipped(!flipped);
@@ -57,64 +86,15 @@ function DeckPage({ windowWidth }) {
     });
   }
 
-  async function fetchName() {
-    try {
-      const { data, error } = await supabase
-        .from("decks")
-        .select("name")
-        .eq("deck_id", deck_id)
-        .limit(1);
-      if (error) throw error;
-      if (data != null) {
-        setName(data[0].name);
-      }
-    } catch (error) {
-      navigate("/not-found");
-    }
-  }
-
-  async function fetchColour() {
-    try {
-      const { data, error } = await supabase
-        .from("decks")
-        .select("colour")
-        .eq("deck_id", deck_id)
-        .limit(1);
-      if (error) throw error;
-      if (data != null) {
-        setColour(data[0].colour.replace("bg-", "").replace(/-\d{2,3}$/, "")); // explain this later
-      }
-    } catch (error) {
-      alert(error.message);
-    }
-  }
-
-  async function fetchCards() {
-    try {
-      const { data, error } = await supabase
-        .from("cards")
-        .select("*")
-        .eq("deck_id", deck_id);
-      if (error) throw error;
-      if (data != null) {
-        setCards(data);
-      }
-    } catch (error) {
-      alert(error.message);
-    }
-  }
-
   function refresh() {
     window.location.reload();
   }
 
   return (
     <>
-      {console.log(cards[index].back)}
-
       {windowWidth >= 1024 ? (
         <>
-          <div className={`flex h-screen flex-col bg-${colour}-500 px-8`}>
+          <div className={`flex h-screen flex-col bg-${deck.colour}-500 px-8`}>
             <header>
               <div className="container mx-auto">
                 <div className="my-16 flex items-center">
@@ -123,11 +103,11 @@ function DeckPage({ windowWidth }) {
                       <span className="hidden italic">
                         {index} / {numOfCards}
                       </span>
-                      <div className="text-xl font-semibold">{name}</div>
+                      <div className="text-xl font-semibold">{deck.name}</div>
                     </div>
                   )}
                   <button
-                    className={`ml-auto flex rounded-full bg-${colour}-600 px-8 py-5 font-semibold text-black`}
+                    className={`ml-auto flex rounded-full bg-${deck.colour}-600 px-8 py-5 font-semibold text-black`}
                     onClick={() => navigate("/")}
                   >
                     <svg
