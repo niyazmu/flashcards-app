@@ -133,7 +133,7 @@ function DeckPage({ windowWidth }) {
               {hideResult ? (
                 <>
                   <div className="container mx-auto flex flex-col items-center justify-center">
-                    <div className="xl:h-[26rem] xl:w-[54rem] flex items-center justify-center rounded-3xl bg-white p-8 lg:h-[24rem] lg:w-[50rem] 2xl:h-[28rem] 2xl:w-[60rem]">
+                    <div className="xl:h-[26rem] xl:w-[54rem] flex items-center justify-center rounded-3xl bg-white p-16 text-center lg:h-[24rem] lg:w-[50rem] 2xl:h-[28rem] 2xl:w-[60rem]">
                       {flipped ? (
                         <div className="text-4xl">{cards[index].back}</div>
                       ) : (
