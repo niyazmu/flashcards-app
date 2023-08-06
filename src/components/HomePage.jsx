@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 import Modal from "./Modal.jsx";
 import CreateForm from "./CreateForm.jsx";
+import SettingsForm from "./SettingsForm.jsx";
 import Deck from "./Deck.jsx";
 import NotSupportedPage from "./NotSupportedPage.jsx";
 
@@ -12,6 +13,7 @@ function HomePage({ windowWidth }) {
   const [cards, setCards] = useState([]);
   const [createModal, setCreateModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
+  const [selectedDeck, setSelectedDeck] = useState({ deck_id: null, name: "" });
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredDecks, setFilteredDecks] = useState([]);
 
@@ -128,14 +130,21 @@ function HomePage({ windowWidth }) {
                       numberOfCards={countCards(deck.deck_id)}
                       colour={deck.colour}
                       deck_id={deck.deck_id}
-                      modal={editModal}
-                      setModal={setEditModal}
+                      setEditModal={setEditModal}
+                      setSelectedDeck={setSelectedDeck}
                     />
                   </div>
                 ))}
               </div>
             </main>
           </div>
+          <Modal
+            heading={`EDIT: ${selectedDeck.name}`}
+            isVisible={editModal}
+            close={() => setEditModal(false)}
+          >
+            <SettingsForm modal={editModal} deck_id={selectedDeck.deck_id} />
+          </Modal>
           <Modal
             heading="Create a new deck"
             isVisible={createModal}

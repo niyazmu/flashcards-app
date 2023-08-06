@@ -1,16 +1,19 @@
 import { Link } from "react-router-dom";
 
-import { useState } from "react";
-
 import supabase from "../supabaseClient.js";
 
-import Modal from "./Modal.jsx";
-import SettingsForm from "./SettingsForm.jsx";
-
-function Deck({ name, numberOfCards, colour, deck_id, modal, setModal }) {
+function Deck({
+  name,
+  numberOfCards,
+  colour,
+  deck_id,
+  setEditModal,
+  setSelectedDeck,
+}) {
   function handleEdit(event) {
     event.preventDefault();
-    setModal(true);
+    setEditModal(true);
+    setSelectedDeck({ name, deck_id });
   }
 
   async function handleDelete(event) {
@@ -91,13 +94,6 @@ function Deck({ name, numberOfCards, colour, deck_id, modal, setModal }) {
           </div>
         </div>
       </Link>
-      <Modal
-        heading={`EDIT: ${name}`}
-        isVisible={modal}
-        close={() => setModal(false)}
-      >
-        <SettingsForm modal={modal} deck_id={deck_id} />
-      </Modal>
     </>
   );
 }
