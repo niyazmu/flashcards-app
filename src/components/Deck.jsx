@@ -7,9 +7,7 @@ import supabase from "../supabaseClient.js";
 import Modal from "./Modal.jsx";
 import SettingsForm from "./SettingsForm.jsx";
 
-function Deck({ name, numberOfCards, colour, deck_id }) {
-  const [modal, setModal] = useState(false);
-
+function Deck({ name, numberOfCards, colour, deck_id, modal, setModal }) {
   function handleEdit(event) {
     event.preventDefault();
     setModal(true);
@@ -42,13 +40,13 @@ function Deck({ name, numberOfCards, colour, deck_id }) {
     <>
       <Link to={`/${deck_id}`} key={deck_id.toString()}>
         <div
-          className={`bg-${colour}-400 flex flex-col justify-between rounded-2xl lg:h-56 lg:p-8 xl:h-72 xl:p-10 2xl:h-56 2xl:p-8`}
+          className={`bg-${colour}-400 xl:h-72 xl:p-10 flex flex-col justify-between rounded-2xl lg:h-56 lg:p-8 2xl:h-56 2xl:p-8`}
         >
-          <h1 className="font-semibold lg:text-xl xl:text-2xl 2xl:text-xl">
+          <h1 className="xl:text-2xl font-semibold lg:text-xl 2xl:text-xl">
             {name}
           </h1>
           <div className="flex items-center justify-between">
-            <div className="italic lg:text-base xl:text-xl 2xl:text-base">
+            <div className="xl:text-xl italic lg:text-base 2xl:text-base">
               {numberOfCards} cards
             </div>
             <div>
@@ -59,7 +57,7 @@ function Deck({ name, numberOfCards, colour, deck_id }) {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="black"
-                  className="h-6 w-6 lg:h-6 lg:w-6 xl:h-8 xl:w-8 2xl:h-6 2xl:w-6"
+                  className="xl:h-8 xl:w-8 h-6 w-6 lg:h-6 lg:w-6 2xl:h-6 2xl:w-6"
                 >
                   <path
                     strokeLinecap="round"
@@ -75,7 +73,7 @@ function Deck({ name, numberOfCards, colour, deck_id }) {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="black"
-                  className="h-6 w-6 lg:h-6 lg:w-6 xl:h-8 xl:w-8 2xl:h-6 2xl:w-6"
+                  className="xl:h-8 xl:w-8 h-6 w-6 lg:h-6 lg:w-6 2xl:h-6 2xl:w-6"
                 >
                   <path
                     strokeLinecap="round"
@@ -93,7 +91,6 @@ function Deck({ name, numberOfCards, colour, deck_id }) {
           </div>
         </div>
       </Link>
-
       <Modal
         heading={`EDIT: ${name}`}
         isVisible={modal}

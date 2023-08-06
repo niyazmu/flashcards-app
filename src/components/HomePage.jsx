@@ -10,7 +10,8 @@ import NotSupportedPage from "./NotSupportedPage.jsx";
 function HomePage({ windowWidth }) {
   const [decks, setDecks] = useState([]);
   const [cards, setCards] = useState([]);
-  const [modal, setModal] = useState(false);
+  const [createModal, setCreateModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredDecks, setFilteredDecks] = useState([]);
 
@@ -63,11 +64,15 @@ function HomePage({ windowWidth }) {
       {windowWidth >= 1024 ? (
         <>
           {/* It's set to hidden so when the modal is active the user cannot see the decks too. */}
-          <div className={`container mx-auto px-8 ${modal ? "hidden" : ""}`}>
+          <div
+            className={`container mx-auto px-8 ${
+              createModal || editModal ? "hidden" : ""
+            }`}
+          >
             <header>
               <div className="my-8 flex justify-end lg:my-16">
                 <button
-                  onClick={() => setModal(true)}
+                  onClick={() => setCreateModal(true)}
                   className="flex h-16 w-16 items-center justify-center rounded-full bg-black text-white"
                 >
                   <svg
@@ -96,7 +101,7 @@ function HomePage({ windowWidth }) {
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
                     stroke="currentColor"
-                    className="h-8 w-8 md:h-10 md:w-10 xl:h-12 xl:w-12 2xl:h-12 2xl:w-12"
+                    className="md:h-10 md:w-10 xl:h-12 xl:w-12 h-8 w-8 2xl:h-12 2xl:w-12"
                   >
                     <path
                       strokeLinecap="round"
@@ -106,7 +111,7 @@ function HomePage({ windowWidth }) {
                   </svg>
                 </div>
                 <input
-                  className="mt-2 w-full text-4xl placeholder-gray-200 outline-none lg:text-6xl xl:text-6xl 2xl:text-7xl"
+                  className="xl:text-6xl mt-2 w-full text-4xl placeholder-gray-200 outline-none lg:text-6xl 2xl:text-7xl"
                   type="text"
                   value={searchQuery}
                   onChange={handleSearch}
@@ -115,7 +120,7 @@ function HomePage({ windowWidth }) {
               </div>
             </header>
             <main>
-              <div className="mb-16 grid gap-8 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
+              <div className="xl:grid-cols-2 mb-16 grid gap-8 lg:grid-cols-2 2xl:grid-cols-3">
                 {(searchQuery === "" ? decks : filteredDecks).map((deck) => (
                   <div key={deck.deck_id}>
                     <Deck
@@ -123,6 +128,8 @@ function HomePage({ windowWidth }) {
                       numberOfCards={countCards(deck.deck_id)}
                       colour={deck.colour}
                       deck_id={deck.deck_id}
+                      modal={editModal}
+                      setModal={setEditModal}
                     />
                   </div>
                 ))}
@@ -131,10 +138,14 @@ function HomePage({ windowWidth }) {
           </div>
           <Modal
             heading="Create a new deck"
-            isVisible={modal}
-            close={() => setModal(false)}
+            isVisible={createModal}
+            close={() => setCreateModal(false)}
           >
-            <CreateForm modal={modal} setModal={setModal} decks={decks} />
+            <CreateForm
+              modal={createModal}
+              setModal={setCreateModal}
+              decks={decks}
+            />
           </Modal>
         </>
       ) : (
