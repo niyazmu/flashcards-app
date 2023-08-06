@@ -100,7 +100,7 @@ function CreateForm({ modal, decks }) {
             type="text"
             name="name"
             value={newDeck.name}
-            maxLength="32"
+            maxLength="36"
             onChange={handleChange}
           />
           {nameError && (

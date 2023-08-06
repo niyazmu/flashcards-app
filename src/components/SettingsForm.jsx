@@ -126,7 +126,7 @@ function SettingsForm({ modal, deck_id }) {
             type="text"
             name="name"
             value={deck.name}
-            maxLength="32"
+            maxLength="36"
             onChange={handleChange}
           />
           {nameError && (

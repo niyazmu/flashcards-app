@@ -152,6 +152,7 @@ function Table({ cards, setCards, cardError, deck_id, setDeletedCardsIds }) {
                   type="text"
                   name="front"
                   rows="4"
+                  maxLength="368"
                   value={card.front}
                   onChange={(event) => handleTextarea(event, index)}
                 />
@@ -162,6 +163,7 @@ function Table({ cards, setCards, cardError, deck_id, setDeletedCardsIds }) {
                   type="text"
                   name="back"
                   rows="4"
+                  maxLength="368"
                   value={card.back}
                   onChange={(event) => handleTextarea(event, index)}
                 />
