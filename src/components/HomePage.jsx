@@ -17,6 +17,12 @@ function HomePage({ windowWidth }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredDecks, setFilteredDecks] = useState([]);
 
+  const sortedDecks = decks.sort((a, b) => {
+    const dateA = new Date(a.timestamp);
+    const dateB = new Date(b.timestamp);
+    return dateA - dateB;
+  });
+
   useEffect(() => {
     fetchDecks();
     fetchCards();
@@ -123,18 +129,20 @@ function HomePage({ windowWidth }) {
             </header>
             <main>
               <div className="xl:grid-cols-2 mb-16 grid gap-8 lg:grid-cols-2 2xl:grid-cols-3">
-                {(searchQuery === "" ? decks : filteredDecks).map((deck) => (
-                  <div key={deck.deck_id}>
-                    <Deck
-                      name={deck.name}
-                      numberOfCards={countCards(deck.deck_id)}
-                      colour={deck.colour}
-                      deck_id={deck.deck_id}
-                      setEditModal={setEditModal}
-                      setSelectedDeck={setSelectedDeck}
-                    />
-                  </div>
-                ))}
+                {(searchQuery === "" ? sortedDecks : filteredDecks).map(
+                  (deck) => (
+                    <div key={deck.deck_id}>
+                      <Deck
+                        name={deck.name}
+                        numberOfCards={countCards(deck.deck_id)}
+                        colour={deck.colour}
+                        deck_id={deck.deck_id}
+                        setEditModal={setEditModal}
+                        setSelectedDeck={setSelectedDeck}
+                      />
+                    </div>
+                  )
+                )}
               </div>
             </main>
           </div>
