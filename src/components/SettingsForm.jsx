@@ -5,7 +5,7 @@ import supabase from "../supabaseClient.js";
 import Swatch from "./Swatch.jsx";
 import Table from "./Table.jsx";
 
-function SettingsForm({ modal, deck_id }) {
+function SettingsForm({ modal, setModal, deck_id }) {
   const [deck, setDeck] = useState({});
   const [cards, setCards] = useState([]);
   const [nameError, setNameError] = useState(false);
@@ -237,12 +237,15 @@ function SettingsForm({ modal, deck_id }) {
       />
       <div className="mt-8 grid grid-cols-2 gap-4">
         <button
+          type="button"
           className="rounded-md border border-black p-4"
           onClick={() => setModal(false)}
         >
           Cancel
         </button>
-        <button className="rounded-md bg-black p-4 text-white">Save</button>
+        <button type="submit" className="rounded-md bg-black p-4 text-white">
+          Save
+        </button>
       </div>
     </form>
   );
