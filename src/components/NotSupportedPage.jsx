@@ -1,8 +1,11 @@
 function NotSupportedPage() {
   return (
-    <>
-      <h1>Oh, no. This app isn't well suited for small screen sizes.</h1>
-    </>
+    <div className="container mx-auto px-8">
+      <h1 className="mb-8 mt-16 text-3xl font-semibold">Not supported</h1>
+      <p className="mb-16 text-base">
+        Oh, no. This app is not well suited for small screen sizes.
+      </p>
+    </div>
   );
 }
 

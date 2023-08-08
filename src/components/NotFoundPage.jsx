@@ -4,20 +4,22 @@ function NotFoundPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="container mx-auto">
-      <h1 className="mb-8 mt-16 text-8xl">404 - Page not found</h1>
-      <p className="mb-16 text-2xl">
-        Oops! The page you are looking for does not exist.
+    <div className="container mx-auto px-8">
+      <h1 className="mb-8 mt-16 text-3xl font-semibold lg:text-3xl 2xl:text-4xl">
+        Page not found
+      </h1>
+      <p className="mb-16 text-base lg:text-base 2xl:text-2xl">
+        Oh, no. The page you are looking for does not exist.
       </p>
       <button
-        className="flex items-center font-medium italic underline"
+        className="flex rounded-full bg-black px-8 py-4 text-white"
         onClick={() => navigate("/")}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
-          className="mr-2 h-5 w-5"
+          className="mr-2 h-6 w-6"
         >
           <path
             fillRule="evenodd"
