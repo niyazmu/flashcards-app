@@ -1,7 +1,17 @@
 import React, { useState } from "react";
 
-function Table({ cards, setCards, cardError, deck_id, setDeletedCardsIds }) {
+function Table({
+  cards,
+  setCards,
+  deck_id,
+  setDeletedCardsIds,
+  submitClicked,
+}) {
   const [selectAll, setSelectAll] = useState(false);
+
+  const isAnyCardEmpty = cards.some(
+    (card) => card.front.trim() === "" || card.back.trim() === ""
+  );
 
   function addCard(event) {
     event.preventDefault();
@@ -148,7 +158,11 @@ function Table({ cards, setCards, cardError, deck_id, setDeletedCardsIds }) {
               </td>
               <td className="relative h-40 border text-left align-top">
                 <textarea
-                  className="block h-full w-full resize-none p-3 outline-2 outline-black"
+                  className={`block h-full w-full resize-none rounded p-3 ${
+                    submitClicked && card.front.trim() === ""
+                      ? "border border-red-500 focus:outline-red-500"
+                      : "border border-transparent focus:outline-black"
+                  }`}
                   type="text"
                   name="front"
                   rows="4"
@@ -159,7 +173,11 @@ function Table({ cards, setCards, cardError, deck_id, setDeletedCardsIds }) {
               </td>
               <td className="relative h-40 border text-left align-top">
                 <textarea
-                  className="block h-full w-full resize-none p-3 outline-2 outline-black"
+                  className={`block h-full w-full resize-none rounded p-3 ${
+                    submitClicked && card.back.trim() === ""
+                      ? "border border-red-500 focus:outline-red-500"
+                      : "border border-transparent focus:outline-black"
+                  }`}
                   type="text"
                   name="back"
                   rows="4"
@@ -174,11 +192,11 @@ function Table({ cards, setCards, cardError, deck_id, setDeletedCardsIds }) {
         <tfoot className="table-footer-group">
           <tr>
             <td colSpan="3">
-              {cardError && (
+              {submitClicked && isAnyCardEmpty ? (
                 <span className="text-sm italic text-red-500">
                   * Please fill in both the front and back of the card(s).
                 </span>
-              )}
+              ) : null}
             </td>
           </tr>
         </tfoot>

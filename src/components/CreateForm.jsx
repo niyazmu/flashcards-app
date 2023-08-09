@@ -16,6 +16,7 @@ function CreateForm({ modal, setModal, decks }) {
   ]);
   const [nameError, setNameError] = useState(false);
   const [cardError, setCardError] = useState(false);
+  const [submitClicked, setSubmitClicked] = useState(false);
 
   useEffect(() => {
     getNextDeckId();
@@ -62,6 +63,7 @@ function CreateForm({ modal, setModal, decks }) {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    setSubmitClicked(true);
     const isAnyCardEmpty = newCards.some(
       (card) => card.front.trim() === "" || card.back.trim() === ""
     );
@@ -93,9 +95,9 @@ function CreateForm({ modal, setModal, decks }) {
           </label>
           <input
             className={`w-full rounded border p-3 ${
-              nameError
+              submitClicked && newDeck.name.trim() === ""
                 ? "border-red-500 focus:outline-red-500"
-                : "border focus:outline-black "
+                : "border focus:outline-black"
             }`}
             type="text"
             name="name"
@@ -103,11 +105,11 @@ function CreateForm({ modal, setModal, decks }) {
             maxLength="36"
             onChange={handleChange}
           />
-          {nameError && (
+          {submitClicked && newDeck.name.trim() === "" ? (
             <span className="text-sm italic text-red-500">
               * Please enter a name.
             </span>
-          )}
+          ) : null}
         </div>
         <div>
           <fieldset>
@@ -207,6 +209,7 @@ function CreateForm({ modal, setModal, decks }) {
         setCards={setNewCards}
         cardError={cardError}
         deck_id={newDeck.deck_id}
+        submitClicked={submitClicked}
       />
       <div className="mt-8 grid grid-cols-2 gap-4">
         <button
