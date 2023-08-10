@@ -151,7 +151,11 @@ function HomePage({ windowWidth }) {
             isVisible={editModal}
             close={() => setEditModal(false)}
           >
-            <SettingsForm modal={editModal} deck_id={selectedDeck.deck_id} />
+            <SettingsForm
+              modal={editModal}
+              setModal={setEditModal}
+              deck_id={selectedDeck.deck_id}
+            />
           </Modal>
           <Modal
             heading="Create a new deck"
