@@ -5,10 +5,10 @@ function NotFoundPage() {
 
   return (
     <div className="container mx-auto px-8">
-      <h1 className="mb-8 mt-16 text-3xl font-semibold lg:text-3xl 2xl:text-4xl">
+      <h1 className="mb-8 mt-16 text-3xl font-semibold 2xl:text-4xl">
         Page not found
       </h1>
-      <p className="mb-16 text-base lg:text-base 2xl:text-2xl">
+      <p className="mb-16">
         Oh, no. The page you are looking for does not exist.
       </p>
       <button
@@ -17,14 +17,16 @@ function NotFoundPage() {
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          className="mr-2 h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="mr-2 h-6 w-6"
         >
           <path
-            fillRule="evenodd"
-            d="M18 10a.75.75 0 01-.75.75H4.66l2.1 1.95a.75.75 0 11-1.02 1.1l-3.5-3.25a.75.75 0 010-1.1l3.5-3.25a.75.75 0 111.02 1.1l-2.1 1.95h12.59A.75.75 0 0118 10z"
-            clipRule="evenodd"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
           />
         </svg>
         Return to homepage
