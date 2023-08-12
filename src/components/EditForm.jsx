@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
 
-import supabase from "../supabaseClient.js";
+import supabase from "../services/supabaseClient.js";
 
 import Swatch from "./Swatch.jsx";
 import Table from "./Table.jsx";
 
-function SettingsForm({ modal, setModal, deck_id }) {
-  const [deck, setDeck] = useState({});
+function EditForm({ modal, setModal, deck_id }) {
+  const [deck, setDeck] = useState({
+    deck_id: null,
+    name: "",
+    colour: "",
+  });
   const [cards, setCards] = useState([]);
-  const [nameError, setNameError] = useState(false);
-  const [cardError, setCardError] = useState(false);
   const [deletedCardsIds, setDeletedCardsIds] = useState([]);
   const [submitClicked, setSubmitClicked] = useState(false);
 
@@ -29,7 +31,7 @@ function SettingsForm({ modal, setModal, deck_id }) {
         setDeck(data[0]);
       }
     } catch (error) {
-      alert(error.message);
+      console.error(error.message);
     }
   }
 
@@ -41,10 +43,13 @@ function SettingsForm({ modal, setModal, deck_id }) {
         .eq("deck_id", deck_id);
       if (error) throw error;
       if (data != null) {
+        data.forEach((obj) => {
+          obj.selected = false;
+        });
         setCards(data);
       }
     } catch (error) {
-      alert(error.message);
+      console.error(error.message);
     }
   }
 
@@ -58,19 +63,6 @@ function SettingsForm({ modal, setModal, deck_id }) {
     });
   }
 
-  function handleErrors(isDeckNameEmpty, isAnyCardEmpty) {
-    if (isDeckNameEmpty) {
-      setNameError(true);
-    } else {
-      setNameError(false);
-    }
-    if (isAnyCardEmpty) {
-      setCardError(true);
-    } else {
-      setCardError(false);
-    }
-  }
-
   async function handleSubmit(event) {
     event.preventDefault();
     setSubmitClicked(true);
@@ -78,34 +70,39 @@ function SettingsForm({ modal, setModal, deck_id }) {
       (card) => card.front.trim() === "" || card.back.trim() === ""
     );
     const isDeckNameEmpty = deck.name.trim() === "";
-    handleErrors(isDeckNameEmpty, isAnyCardEmpty);
     if (!isDeckNameEmpty && !isAnyCardEmpty) {
       try {
-        const { data, error } = await supabase
+        const { error } = await supabase
           .from("decks")
           .update(deck)
           .eq("deck_id", deck_id);
         if (error) throw error;
       } catch (error) {
-        alert(error.message);
+        console.error(error.message);
       }
       try {
-        const { data, error } = await supabase
+        const { error } = await supabase
           .from("cards")
           .delete()
           .in("card_id", deletedCardsIds);
         if (error) throw error;
       } catch (error) {
-        alert(error.message);
+        console.error(error.message);
       }
-      for (const card of cards) {
+      const cardsWithoutSelectedProperty = cards.map((card) => ({
+        ...(card.card_id ? { card_id: card.card_id } : {}), // If the 'card_id' exists, add the 'card_id' property along with its value; otherwise, do not add the property to the 'card' for 'upsert'.
+        front: card.front,
+        back: card.back,
+        deck_id: card.deck_id,
+      }));
+      for (const card of cardsWithoutSelectedProperty) {
         try {
-          const { data, error } = await supabase
+          const { error } = await supabase
             .from("cards")
             .upsert([card], { onConflict: ["card_id"] });
           if (error) throw error;
         } catch (error) {
-          alert(error.message);
+          console.error(error.message);
         }
       }
       window.location.reload();
@@ -233,7 +230,6 @@ function SettingsForm({ modal, setModal, deck_id }) {
       <Table
         cards={cards}
         setCards={setCards}
-        cardError={cardError}
         deck_id={deck.deck_id}
         setDeletedCardsIds={setDeletedCardsIds}
         submitClicked={submitClicked}
@@ -254,4 +250,4 @@ function SettingsForm({ modal, setModal, deck_id }) {
   );
 }
 
-export default SettingsForm;
+export default EditForm;

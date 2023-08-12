@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Table({
   cards,
@@ -28,7 +28,6 @@ function Table({
     event.preventDefault();
     const updatedCards = cards.filter((card) => !card.selected);
     setCards(updatedCards);
-
     if (typeof setDeletedCardsIds === "function") {
       const deletedCardId = cards
         .filter((card) => card.selected && card.card_id !== undefined)
@@ -38,7 +37,6 @@ function Table({
         ...deletedCardId,
       ]);
     }
-
     if (updatedCards.length === 0) {
       setSelectAll(false);
     }
@@ -51,24 +49,21 @@ function Table({
     setCards(updatedCards);
   }
 
-  function handleSelectAll() {
-    setSelectAll(!selectAll);
-
-    // No idea why when selectAll is 'false' it selects all when it should be the other way around.
-    if (selectAll === false) {
+  // This handles the case where the user clicks the 'select all' checkmark.
+  useEffect(() => {
+    if (selectAll === true) {
       const updatedCards = cards.map((card) => {
         return { ...card, selected: true };
       });
       setCards(updatedCards);
     }
-
-    if (selectAll === true) {
+    if (selectAll === false) {
       const updatedCards = cards.map((card) => {
         return { ...card, selected: false };
       });
       setCards(updatedCards);
     }
-  }
+  }, [selectAll]);
 
   function handleSelect(index) {
     const updatedCards = cards.map((card, i) => {
@@ -135,7 +130,7 @@ function Table({
               <input
                 type="checkbox"
                 checked={selectAll}
-                onChange={handleSelectAll}
+                onChange={() => setSelectAll(!selectAll)}
               />
             </th>
             <th className="w-1/2 border border-b-2 bg-slate-50 p-3 font-medium">

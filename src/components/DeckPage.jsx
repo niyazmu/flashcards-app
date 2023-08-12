@@ -1,4 +1,4 @@
-import supabase from "../supabaseClient";
+import supabase from "../services/supabaseClient";
 
 import { useState, useEffect } from "react";
 
@@ -51,12 +51,8 @@ function DeckPage({ windowWidth }) {
         setCards(data);
       }
     } catch (error) {
-      alert(error.message);
+      console.error(error.message);
     }
-  }
-
-  function flip() {
-    setFlipped(!flipped);
   }
 
   function correct() {
@@ -94,7 +90,9 @@ function DeckPage({ windowWidth }) {
     <>
       {windowWidth >= 1024 ? (
         <>
-          <div className={`flex h-screen flex-col bg-${deck.colour}-500 px-8`}>
+          <div
+            className={`flex h-screen flex-col bg-${deck.colour}-500 px-8 2xl:px-16`}
+          >
             <header>
               <div className="container mx-auto">
                 <div className="my-16 flex items-center">
@@ -133,11 +131,15 @@ function DeckPage({ windowWidth }) {
               {hideResult ? (
                 <>
                   <div className="container mx-auto flex flex-col items-center justify-center">
-                    <div className="xl:h-[26rem] xl:w-[54rem] flex items-center justify-center rounded-3xl bg-white p-16 text-center lg:h-[24rem] lg:w-[50rem] 2xl:h-[28rem] 2xl:w-[60rem]">
+                    <div className="flex h-[24rem] w-[50rem] items-center justify-center rounded-3xl bg-white p-16 text-center 2xl:h-[28rem] 2xl:w-[60rem]">
                       {flipped ? (
-                        <div className="text-4xl">{cards[index].back}</div>
+                        <div className="text-3xl 2xl:text-4xl">
+                          {cards[index].back}
+                        </div>
                       ) : (
-                        <div className="text-4xl">{cards[index].front}</div>
+                        <div className="text-3xl 2xl:text-4xl">
+                          {cards[index].front}
+                        </div>
                       )}
                     </div>
                     <div className="mb-16 mt-8 flex gap-4">
@@ -163,7 +165,7 @@ function DeckPage({ windowWidth }) {
                       </button>
                       <button
                         className="flex rounded-full bg-black px-8 py-4 text-white"
-                        onClick={flip}
+                        onClick={() => setFlipped(!flipped)}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -209,11 +211,9 @@ function DeckPage({ windowWidth }) {
                   <div className="container mx-auto flex flex-col items-center justify-center">
                     <div className="mb-48 mt-16 flex flex-col items-center">
                       <h1 className="mb-8 text-left">
-                        <span className="text-2xl font-medium lg:text-4xl">
-                          You scored
-                        </span>
+                        <span className="text-4xl font-medium">You scored</span>
                         <br />
-                        <span className="text-5xl font-medium lg:text-8xl">
+                        <span className="text-8xl font-medium">
                           {count} out of {numOfCards}
                         </span>
                       </h1>
@@ -227,7 +227,7 @@ function DeckPage({ windowWidth }) {
                           viewBox="0 0 24 24"
                           strokeWidth={1.5}
                           stroke="currentColor"
-                          className="h-6 w-6 lg:mr-2"
+                          className="mr-2 h-6 w-6"
                         >
                           <path
                             strokeLinecap="round"

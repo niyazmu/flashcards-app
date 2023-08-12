@@ -1,10 +1,10 @@
-import supabase from "../supabaseClient";
+import supabase from "../services/supabaseClient";
 
 import { useState, useEffect } from "react";
 
 import Modal from "./Modal.jsx";
 import CreateForm from "./CreateForm.jsx";
-import SettingsForm from "./SettingsForm.jsx";
+import EditForm from "./EditForm.jsx";
 import Deck from "./Deck.jsx";
 import NotSupportedPage from "./NotSupportedPage.jsx";
 
@@ -36,7 +36,7 @@ function HomePage({ windowWidth }) {
         setDecks(data);
       }
     } catch (error) {
-      alert(error.message);
+      console.error(error.message);
     }
   }
 
@@ -48,7 +48,7 @@ function HomePage({ windowWidth }) {
         setCards(data);
       }
     } catch (error) {
-      alert(error.message);
+      console.error(error.message);
     }
   }
 
@@ -71,14 +71,14 @@ function HomePage({ windowWidth }) {
     <>
       {windowWidth >= 1024 ? (
         <>
-          {/* It's set to hidden so when the modal is active the user cannot see the decks too. */}
+          {/* When a modal is active, this is set to 'hidden', preventing the decks from causing a secondary overflow in the vertical direction. */}
           <div
-            className={`container mx-auto px-8 ${
+            className={`container mx-auto px-8 2xl:px-16 ${
               createModal || editModal ? "hidden" : ""
             }`}
           >
             <header>
-              <div className="my-8 flex justify-end lg:my-16">
+              <div className="my-16 flex justify-end">
                 <button
                   onClick={() => setCreateModal(true)}
                   className="flex h-16 w-16 items-center justify-center rounded-full bg-black text-white"
@@ -109,7 +109,7 @@ function HomePage({ windowWidth }) {
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
                     stroke="currentColor"
-                    className="md:h-10 md:w-10 xl:h-12 xl:w-12 h-8 w-8 2xl:h-12 2xl:w-12"
+                    className="h-10 w-10 2xl:h-12 2xl:w-12"
                   >
                     <path
                       strokeLinecap="round"
@@ -119,7 +119,7 @@ function HomePage({ windowWidth }) {
                   </svg>
                 </div>
                 <input
-                  className="xl:text-6xl mt-2 w-full text-4xl placeholder-gray-200 outline-none lg:text-6xl 2xl:text-7xl"
+                  className="mt-2 w-full text-6xl  placeholder-gray-200 outline-none 2xl:text-7xl"
                   type="text"
                   value={searchQuery}
                   onChange={handleSearch}
@@ -128,7 +128,7 @@ function HomePage({ windowWidth }) {
               </div>
             </header>
             <main>
-              <div className="xl:grid-cols-2 mb-16 grid gap-8 lg:grid-cols-2 2xl:grid-cols-3">
+              <div className="mb-16 grid grid-cols-2 gap-8 2xl:grid-cols-3">
                 {(searchQuery === "" ? sortedDecks : filteredDecks).map(
                   (deck) => (
                     <div key={deck.deck_id}>
@@ -151,7 +151,7 @@ function HomePage({ windowWidth }) {
             isVisible={editModal}
             close={() => setEditModal(false)}
           >
-            <SettingsForm
+            <EditForm
               modal={editModal}
               setModal={setEditModal}
               deck_id={selectedDeck.deck_id}
@@ -162,11 +162,7 @@ function HomePage({ windowWidth }) {
             isVisible={createModal}
             close={() => setCreateModal(false)}
           >
-            <CreateForm
-              modal={createModal}
-              setModal={setCreateModal}
-              decks={decks}
-            />
+            <CreateForm setModal={setCreateModal} />
           </Modal>
         </>
       ) : (

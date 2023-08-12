@@ -1,86 +1,66 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-import supabase from "../supabaseClient.js";
+import supabase from "../services/supabaseClient.js";
 
 import Swatch from "./Swatch.jsx";
 import Table from "./Table.jsx";
 
-function CreateForm({ modal, setModal, decks }) {
-  const [newDeck, setNewDeck] = useState({
-    deck_id: null,
+function CreateForm({ setModal }) {
+  const [deck, setDeck] = useState({
     name: "",
     colour: "red",
   });
-  const [newCards, setNewCards] = useState([
-    { front: "", back: "", deck_id: null, selected: false },
+  const [cards, setCards] = useState([
+    { front: "", back: "", selected: false },
   ]);
-  const [nameError, setNameError] = useState(false);
-  const [cardError, setCardError] = useState(false);
   const [submitClicked, setSubmitClicked] = useState(false);
-
-  useEffect(() => {
-    getNextDeckId();
-  }, [modal]);
-
-  function getNextDeckId() {
-    const lastDeckIndex = decks.length - 1;
-    const isDecksEmpty = decks.length === 0;
-    const newDeckId = isDecksEmpty ? 1 : decks[lastDeckIndex].deck_id + 1;
-    setNewDeck((prevNewDeck) => ({
-      ...prevNewDeck,
-      deck_id: newDeckId,
-    }));
-    setNewCards((prevNewCards) =>
-      prevNewCards.map((prevNewCard) => ({
-        ...prevNewCard,
-        deck_id: newDeckId,
-      }))
-    );
-  }
 
   function handleChange(event) {
     const { name, value } = event.target;
-    setNewDeck((prevNewDeck) => {
+    setDeck((prevDeck) => {
       return {
-        ...prevNewDeck,
+        ...prevDeck,
         [name]: value,
       };
     });
   }
 
-  function handleErrors(isDeckNameEmpty, isAnyCardEmpty) {
-    if (isDeckNameEmpty) {
-      setNameError(true);
-    } else {
-      setNameError(false);
-    }
-    if (isAnyCardEmpty) {
-      setCardError(true);
-    } else {
-      setCardError(false);
-    }
-  }
-
   async function handleSubmit(event) {
     event.preventDefault();
     setSubmitClicked(true);
-    const isAnyCardEmpty = newCards.some(
+    const isAnyCardEmpty = cards.some(
       (card) => card.front.trim() === "" || card.back.trim() === ""
     );
-    const isDeckNameEmpty = newDeck.name.trim() === "";
-    handleErrors(isDeckNameEmpty, isAnyCardEmpty);
+    const isDeckNameEmpty = deck.name.trim() === "";
     if (!isDeckNameEmpty && !isAnyCardEmpty) {
+      let newDeckId = null;
       try {
-        const { data, error } = await supabase.from("decks").insert(newDeck);
+        const { data, error } = await supabase
+          .from("decks")
+          .insert(deck)
+          .select();
         if (error) throw error;
+        newDeckId = data[0].deck_id;
       } catch (error) {
-        alert(error.message);
+        console.error(error.message);
       }
       try {
-        const { data, error } = await supabase.from("cards").insert(newCards);
+        const cardsWithoutSelectedProperty = cards.map((card) => ({
+          front: card.front,
+          back: card.back,
+        }));
+        const cardsWithForeignKey = cardsWithoutSelectedProperty.map(
+          (card) => ({
+            ...card,
+            deck_id: newDeckId,
+          })
+        );
+        const { error } = await supabase
+          .from("cards")
+          .insert(cardsWithForeignKey);
         if (error) throw error;
       } catch (error) {
-        alert(error.message);
+        console.error(error.message);
       }
       window.location.reload();
     }
@@ -88,24 +68,24 @@ function CreateForm({ modal, setModal, decks }) {
 
   return (
     <form onSubmit={(event) => handleSubmit(event)}>
-      <div className="mb-8 grid grid-cols-1 gap-8 lg:grid-cols-2">
+      <div className="mb-8 grid grid-cols-2 gap-8">
         <div>
           <label className="mb-4 block font-medium" htmlFor="name">
             Name
           </label>
           <input
             className={`w-full rounded border p-3 ${
-              submitClicked && newDeck.name.trim() === ""
+              submitClicked && deck.name.trim() === ""
                 ? "border-red-500 focus:outline-red-500"
                 : "border focus:outline-black"
             }`}
             type="text"
             name="name"
-            value={newDeck.name}
+            value={deck.name}
             maxLength="36"
             onChange={handleChange}
           />
-          {submitClicked && newDeck.name.trim() === "" ? (
+          {submitClicked && deck.name.trim() === "" ? (
             <span className="text-sm italic text-red-500">
               * Please enter a name.
             </span>
@@ -117,87 +97,87 @@ function CreateForm({ modal, setModal, decks }) {
             <div className="flex flex-wrap gap-2">
               <Swatch
                 colour="red"
-                checked={newDeck.colour === "red"}
+                checked={deck.colour === "red"}
                 handleChange={handleChange}
               />
               <Swatch
                 colour="orange"
-                checked={newDeck.colour === "orange"}
+                checked={deck.colour === "orange"}
                 handleChange={handleChange}
               />
               <Swatch
                 colour="amber"
-                checked={newDeck.colour === "amber"}
+                checked={deck.colour === "amber"}
                 handleChange={handleChange}
               />
               <Swatch
                 colour="yellow"
-                checked={newDeck.colour === "yellow"}
+                checked={deck.colour === "yellow"}
                 handleChange={handleChange}
               />
               <Swatch
                 colour="lime"
-                checked={newDeck.colour === "lime"}
+                checked={deck.colour === "lime"}
                 handleChange={handleChange}
               />
               <Swatch
                 colour="green"
-                checked={newDeck.colour === "green"}
+                checked={deck.colour === "green"}
                 handleChange={handleChange}
               />
               <Swatch
                 colour="emerald"
-                checked={newDeck.colour === "emerald"}
+                checked={deck.colour === "emerald"}
                 handleChange={handleChange}
               />
               <Swatch
                 colour="teal"
-                checked={newDeck.colour === "teal"}
+                checked={deck.colour === "teal"}
                 handleChange={handleChange}
               />
               <Swatch
                 colour="cyan"
-                checked={newDeck.colour === "cyan"}
+                checked={deck.colour === "cyan"}
                 handleChange={handleChange}
               />
               <Swatch
                 colour="sky"
-                checked={newDeck.colour === "sky"}
+                checked={deck.colour === "sky"}
                 handleChange={handleChange}
               />
               <Swatch
                 colour="blue"
-                checked={newDeck.colour === "blue"}
+                checked={deck.colour === "blue"}
                 handleChange={handleChange}
               />
               <Swatch
                 colour="indigo"
-                checked={newDeck.colour === "indigo"}
+                checked={deck.colour === "indigo"}
                 handleChange={handleChange}
               />
               <Swatch
                 colour="violet"
-                checked={newDeck.colour === "violet"}
+                checked={deck.colour === "violet"}
                 handleChange={handleChange}
               />
               <Swatch
                 colour="purple"
-                checked={newDeck.colour === "purple"}
+                checked={deck.colour === "purple"}
                 handleChange={handleChange}
               />
               <Swatch
                 colour="fuchsia"
-                checked={newDeck.colour === "fuchsia"}
+                checked={deck.colour === "fuchsia"}
                 handleChange={handleChange}
               />
               <Swatch
                 colour="pink"
-                checked={newDeck.colour === "pink"}
+                checked={deck.colour === "pink"}
                 handleChange={handleChange}
               />
               <Swatch
                 colour="rose"
-                checked={newDeck.colour === "rose"}
+                checked={deck.colour === "rose"}
                 handleChange={handleChange}
               />
             </div>
@@ -205,10 +185,9 @@ function CreateForm({ modal, setModal, decks }) {
         </div>
       </div>
       <Table
-        cards={newCards}
-        setCards={setNewCards}
-        cardError={cardError}
-        deck_id={newDeck.deck_id}
+        cards={cards}
+        setCards={setCards}
+        deck_id={deck.deck_id}
         submitClicked={submitClicked}
       />
       <div className="mt-8 grid grid-cols-2 gap-4">

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import supabase from "../supabaseClient.js";
+import supabase from "../services/supabaseClient.js";
 
 function Deck({
   name,
@@ -18,23 +18,24 @@ function Deck({
 
   async function handleDelete(event) {
     event.preventDefault();
+    // You have to delete cards first before deleting the deck because they are entangled.
     try {
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from("cards")
         .delete()
         .eq("deck_id", deck_id);
       if (error) throw error;
     } catch (error) {
-      alert(error.message);
+      console.error(error.message);
     }
     try {
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from("decks")
         .delete()
         .eq("deck_id", deck_id);
       if (error) throw error;
     } catch (error) {
-      alert(error.message);
+      console.error(error.message);
     }
     window.location.reload();
   }
@@ -43,15 +44,11 @@ function Deck({
     <>
       <Link to={`/${deck_id}`} key={deck_id.toString()}>
         <div
-          className={`bg-${colour}-400 xl:h-72 xl:p-10 flex flex-col justify-between rounded-2xl lg:h-56 lg:p-8 2xl:h-56 2xl:p-8`}
+          className={`bg-${colour}-400 flex h-56 flex-col justify-between rounded-2xl p-8`}
         >
-          <h1 className="xl:text-2xl font-semibold lg:text-xl 2xl:text-xl">
-            {name}
-          </h1>
+          <h1 className="text-xl font-semibold 2xl:text-xl">{name}</h1>
           <div className="flex items-center justify-between">
-            <div className="xl:text-xl italic lg:text-base 2xl:text-base">
-              {numberOfCards} cards
-            </div>
+            <div className="text-base italic">{numberOfCards} cards</div>
             <div>
               <button onClick={handleDelete}>
                 <svg
@@ -60,7 +57,7 @@ function Deck({
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="black"
-                  className="xl:h-8 xl:w-8 h-6 w-6 lg:h-6 lg:w-6 2xl:h-6 2xl:w-6"
+                  className="h-6 w-6"
                 >
                   <path
                     strokeLinecap="round"
@@ -76,7 +73,7 @@ function Deck({
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="black"
-                  className="xl:h-8 xl:w-8 h-6 w-6 lg:h-6 lg:w-6 2xl:h-6 2xl:w-6"
+                  className="h-6 w-6"
                 >
                   <path
                     strokeLinecap="round"

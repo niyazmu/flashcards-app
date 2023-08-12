@@ -7,9 +7,9 @@ function Modal(props) {
   return ReactDOM.createPortal(
     <>
       <div className="absolute right-0 top-0 z-10 h-screen w-screen overflow-y-auto bg-white">
-        <div className="container mx-auto px-8">
-          <div className="my-8 flex items-center justify-between lg:my-16">
-            <h1 className="flex-grow-0 font-semibold lg:text-4xl 2xl:text-4xl">
+        <div className="container mx-auto px-8 2xl:px-16">
+          <div className="my-16 flex items-center justify-between">
+            <h1 className="flex-grow-0 text-3xl font-semibold 2xl:text-4xl">
               {props.heading}
             </h1>
             <button
@@ -30,9 +30,7 @@ function Modal(props) {
               </svg>
             </button>
           </div>
-          <div className="xl:w-3/4 mb-16 lg:w-full 2xl:w-1/2">
-            {props.children}
-          </div>
+          <div className="mb-16 w-full 2xl:w-3/5">{props.children}</div>
         </div>
       </div>
     </>,
